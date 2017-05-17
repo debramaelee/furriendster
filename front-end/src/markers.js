@@ -1,31 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Search for up to 200 places with Radar Search</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-    <script>
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    import React from 'react';
 
-      var map;
-      var infoWindow;
-      var service;
+    var map;
+    var infoWindow;
+    var service;
 
-      function initMap() {
+      export function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 33.818420, lng: -84.359463},
           zoom: 15,
@@ -38,14 +17,14 @@
         });
 
         infoWindow = new google.maps.InfoWindow();
-        service = new google.maps.places.PlacesService(map);
+        // service = new google.maps.places.PlacesService(map);
 
         // The idle event is a debounced event, so we can query & listen without
         // throwing too many requests at the server.
         map.addListener('idle', performSearch);
       }
 
-      function performSearch() {
+      export function performSearch() {
         var request = {
           bounds: map.getBounds(),
           keyword: 'dog park'
@@ -53,7 +32,7 @@
         service.radarSearch(request, callback);
       }
 
-      function callback(results, status) {
+      export function callback(results, status) {
         if (status !== google.maps.places.PlacesServiceStatus.OK) {
           console.error(status);
           return;
@@ -63,7 +42,7 @@
         }
       }
 
-      function addMarker(place) {
+      export function addMarker(place) {
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location,
@@ -85,10 +64,3 @@
           });
         });
       }
-    </script>
-  </head>
-  <body>
-    <div id="map"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVrVxcL1OWdPkRQLpgEcO6kB5xWkWFZM&callback=initMap&libraries=places,visualization" async defer></script>
-  </body>
-</html>

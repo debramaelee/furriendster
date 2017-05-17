@@ -1,5 +1,40 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 50px;
   font-family: sans-serif;
+}
+
+ul.nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.nav li {
+  list-style: none;
+  padding: 0 10px 0 0;
+  float: left;
+}
+
+ul.nav:before,
+ul.nav:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+ul.nav:after {
+    clear: both;
+}
+
+.active {
+  color: red;
+}
+
+.content {
+  padding: 20px 0;
+}
+
+.map {
+  height: 400px;
+  width: 100%;
 }

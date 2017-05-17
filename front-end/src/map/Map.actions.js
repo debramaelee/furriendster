@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import {hashHistory} from 'react-router';
 
 
 
