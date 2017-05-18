@@ -24,12 +24,6 @@ class Map extends React.Component {
     this.service.radarSearch(request, callback);
   }
 
-  // findCoord() {
-  //
-  //   let zipCode = this.map.loginInfo;
-  //   console.log(zipCode);
-  //
-  // }
 
   addMarker(place) {
     var marker = new google.maps.Marker({
@@ -54,44 +48,43 @@ class Map extends React.Component {
     });
   }
 
-  // geocodeAddress(geocoder, resultsMap) {
-  //   let address = this.props.zip;
-  //   geocoder.geocode({'address' : address}, (results, status)=>{
-  //     resultsMap.setCenter(results[0].geometry.location);
-  //   })
-  // }
-
-  // var geocoder = new google.maps.Geocoder();
-  // geocodeAddress(geocoder, map);
-
   componentDidMount() {
+    var geocoder = new google.maps.Geocoder();
+    let address = this.props.zip
+    geocoder.geocode( { 'address': address}, (results, status)=>{
+      let coord;
+
+      if (status == google.maps.GeocoderStatus.OK) {
+        var latitude = results[0].geometry.location.lat();
+        var longitude = results[0].geometry.location.lng();
+        console.log(latitude, longitude);
+         coord = {
+          lat: latitude,
+          lng: longitude
+
+        };
+        let map = this.map = new google.maps.Map(this.mapElm, {
+          zoom: 15,
+          center: coord,
+          styles: [{
+                stylers: [{ visibility: 'simplified' }]
+              }, {
+                elementType: 'labels',
+                stylers: [{ visibility: 'on' }]
+              }]
+        });
+        this.service = new google.maps.places.PlacesService(map);
+        this.map.addListener('idle', ()=>this.performSearch());
+
+        }
+    });
+
     console.log('component mounting')
-    this.props.getUserInfo();
 
     this.infoWindow = new google.maps.InfoWindow();
 
     console.log('Map did mount');
-    let coord = {
-      lat: this.props.lat,
-      lng: this.props.lng
-    };
-    let map = this.map = new google.maps.Map(this.mapElm, {
-      zoom: 15,
-      center: coord,
-      styles: [{
-            stylers: [{ visibility: 'simplified' }]
-          }, {
-            elementType: 'labels',
-            stylers: [{ visibility: 'on' }]
-          }]
-    });
 
-
-
-    this.service = new google.maps.places.PlacesService(map);
-    //creating a new funct calling perfSearch method
-    this.map.addListener('idle', ()=>this.performSearch());
-    // this.map.addListener('idle', this.performSearch);
   }
 
    update(){
@@ -102,7 +95,6 @@ class Map extends React.Component {
 
 
     this.props.updateCenter(coord);
-    // this.props.getUserInfo();
   }
 
   componentWillReceiveProps(newProps) {
@@ -123,6 +115,7 @@ class Map extends React.Component {
 
   render() {
     console.log(this.props.zip)
+
     return (
       <div>
         <label>Latitude</label>
