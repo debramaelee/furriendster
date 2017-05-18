@@ -3,6 +3,7 @@ import * as ReactRedux from 'react-redux';
 import * as actions from './Map.actions';
 const google = window.google;
 
+
 class Map extends React.Component {
 
   performSearch() {
@@ -11,6 +12,7 @@ class Map extends React.Component {
       keyword: 'dog park'
     };
     let callback=(results, status) => {
+
       if (status !== google.maps.places.PlacesServiceStatus.OK) {
         console.error(status);
         return;
@@ -21,6 +23,13 @@ class Map extends React.Component {
     }
     this.service.radarSearch(request, callback);
   }
+
+  // findCoord() {
+  //
+  //   let zipCode = this.map.loginInfo;
+  //   console.log(zipCode);
+  //
+  // }
 
   addMarker(place) {
     var marker = new google.maps.Marker({
@@ -45,7 +54,19 @@ class Map extends React.Component {
     });
   }
 
+  // geocodeAddress(geocoder, resultsMap) {
+  //   let address = this.props.zip;
+  //   geocoder.geocode({'address' : address}, (results, status)=>{
+  //     resultsMap.setCenter(results[0].geometry.location);
+  //   })
+  // }
+
+  // var geocoder = new google.maps.Geocoder();
+  // geocodeAddress(geocoder, map);
+
   componentDidMount() {
+    console.log('component mounting')
+    this.props.getUserInfo();
 
     this.infoWindow = new google.maps.InfoWindow();
 
@@ -65,6 +86,8 @@ class Map extends React.Component {
           }]
     });
 
+
+
     this.service = new google.maps.places.PlacesService(map);
     //creating a new funct calling perfSearch method
     this.map.addListener('idle', ()=>this.performSearch());
@@ -76,7 +99,10 @@ class Map extends React.Component {
       lat: this.latInput.value,
       lng: this.lngInput.value
     };
+
+
     this.props.updateCenter(coord);
+    // this.props.getUserInfo();
   }
 
   componentWillReceiveProps(newProps) {
@@ -96,6 +122,7 @@ class Map extends React.Component {
   }
 
   render() {
+    console.log(this.props.zip)
     return (
       <div>
         <label>Latitude</label>
@@ -104,6 +131,9 @@ class Map extends React.Component {
         <label>Longitude</label>
         <input type="text"
           ref={input => this.lngInput = input}/>
+        <label>Zip Code</label>
+        <input type="text"
+          ref={input => this.zipCode = input}/>
         <button onClick={() => this.update()}>Update</button>
         <div className="map" ref={elm => this.mapElm = elm}>
         </div>
@@ -114,7 +144,13 @@ class Map extends React.Component {
 
 
 const MapContainer = ReactRedux.connect(
-  state => state.map,
+  state => ({
+    lat: state.map.lat,
+    lng: state.map.lng,
+    // login: state.login,
+    zip: state.login.loginInfo.zip
+  }),
+
   actions
 )(Map);
 

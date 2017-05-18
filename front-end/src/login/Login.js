@@ -30,12 +30,13 @@ class Login extends React.Component {
     event.preventDefault();
     this.props.login(
       this.state.email,
-      this.state.password
+      this.state.password,
+      this.state.zip
     );
   }
 
   render() {
-
+  
     return (
       <div>
         <form onSubmit = {event=> this.submit(event)}>
