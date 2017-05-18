@@ -5,10 +5,49 @@ const google = window.google;
 
 class Map extends React.Component {
 
+  performSearch() {
+    var request = {
+      bounds: this.map.getBounds(),
+      keyword: 'dog park'
+    };
+    let callback=(results, status) => {
+      if (status !== google.maps.places.PlacesServiceStatus.OK) {
+        console.error(status);
+        return;
+      }
+      for (var i = 0, result; result = results[i]; i++) {
+        this.addMarker(result);
+      }
+    }
+    this.service.radarSearch(request, callback);
+  }
+
+  addMarker(place) {
+    var marker = new google.maps.Marker({
+      map: this.map,
+      position: place.geometry.location,
+      icon: {
+        url: 'https://cdn1.iconfinder.com/data/icons/cute-corgi-dog-emoticon/595/CUTE_CORGI_DOG_EMOTICON-08-512.png',
+        anchor: new google.maps.Point(10, 10),
+        scaledSize: new google.maps.Size(50, 50)
+      }
+    });
+
+    google.maps.event.addListener(marker, 'click', ()=> {
+      this.service.getDetails(place, (result, status)=> {
+        if (status !== google.maps.places.PlacesServiceStatus.OK) {
+          console.error(status);
+          return;
+        }
+        this.infoWindow.setContent(result.name);
+        this.infoWindow.open(this.map, marker);
+      });
+    });
+  }
+
   componentDidMount() {
 
-    var infoWindow;
-    var service;
+    this.infoWindow = new google.maps.InfoWindow();
 
     console.log('Map did mount');
     let coord = {
@@ -26,56 +65,11 @@ class Map extends React.Component {
           }]
     });
 
-    service = new google.maps.places.PlacesService(map);
-    map.addListener('idle', performSearch);
-
-
-    function performSearch() {
-      var request = {
-        bounds: map.getBounds(),
-        keyword: 'dog park'
-      };
-      service.radarSearch(request, callback);
-    }
-
-    function callback(results, status) {
-      if (status !== google.maps.places.PlacesServiceStatus.OK) {
-        console.error(status);
-        return;
-      }
-      for (var i = 0, result; result = results[i]; i++) {
-        addMarker(result);
-      }
-    }
-
-    function addMarker(place) {
-      var marker = new google.maps.Marker({
-        map: map,
-        position: place.geometry.location,
-        icon: {
-          url: 'https://cdn1.iconfinder.com/data/icons/cute-corgi-dog-emoticon/595/CUTE_CORGI_DOG_EMOTICON-08-512.png',
-          anchor: new google.maps.Point(10, 10),
-          scaledSize: new google.maps.Size(50, 50)
-        }
-      });
-
-      google.maps.event.addListener(marker, 'click', function() {
-        service.getDetails(place, function(result, status) {
-          if (status !== google.maps.places.PlacesServiceStatus.OK) {
-            console.error(status);
-            return;
-          }
-          infoWindow.setContent(result.name);
-          infoWindow.open(map, marker);
-        });
-      });
-    }
-
+    this.service = new google.maps.places.PlacesService(map);
+    //creating a new funct calling perfSearch method
+    this.map.addListener('idle', ()=>this.performSearch());
+    // this.map.addListener('idle', this.performSearch);
   }
-
-
-
-
 
    update(){
     let coord = {
@@ -84,8 +78,6 @@ class Map extends React.Component {
     };
     this.props.updateCenter(coord);
   }
-
-
 
   componentWillReceiveProps(newProps) {
     // old props
@@ -98,13 +90,10 @@ class Map extends React.Component {
     }
   }
 
-
   componentWillUnmount() {
     clearInterval(this.timeoutId);
     console.log('Map will unmount');
   }
-
-
 
   render() {
     return (

@@ -11,6 +11,8 @@ import { Router, Route, Link, IndexLink, IndexRoute, hashHistory } from 'react-r
 import homeReducer from './home/Home.reducer';
 import HomeContainer from './home/Home';
 
+import loginReducer from './login/Login.reducer';
+import LoginContainer from './login/Login';
 
 import signupReducer from './signup/Signup.reducer';
 import SignupContainer from './signup/Signup';
@@ -21,6 +23,7 @@ import MapContainer from './map/Map';
 const reducer = Redux.combineReducers({
 
   home: homeReducer,
+  login: loginReducer,
   signup: signupReducer,
   map: mapReducer
 });
@@ -33,11 +36,14 @@ const store = Redux.createStore(
 
 class AppLayout extends React.Component {
   render() {
+    let loggedIn = !!this.props.loginInfo;
     return (
       <div>
         <ul className="nav">
           <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-          <li><Link to="/user/signup" activeClassName="active">Sign Up</Link></li>
+
+            <li><Link to="/user/signup" activeClassName="active">Sign Up</Link></li>
+            <li><Link to="/user/login" activeClassName="active">Log In</Link></li> 
           <li><Link to="/map" activeClassName="active">Map</Link></li>
         </ul>
         {this.props.children}
@@ -46,12 +52,19 @@ class AppLayout extends React.Component {
   }
 }
 
+const AppLayoutContainer = ReactRedux.connect(
+  state => ({
+    loginInfo: state.login.loginInfo
+  })
+) (AppLayout);
+
 ReactDOM.render(
   <ReactRedux.Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={AppLayout}>
         <IndexRoute component={HomeContainer}/>
         <Route path="/user/signup" component={SignupContainer}/>
+        <Route path="/user/login" component={LoginContainer}/>
         <Route path="/map" component={MapContainer}/>
       </Route>
     </Router>
