@@ -64,7 +64,7 @@ class Map extends React.Component {
 
         };
         let map = this.map = new google.maps.Map(this.mapElm, {
-          zoom: 15,
+          zoom: 13,
           center: coord,
           styles: [{
                 stylers: [{ visibility: 'simplified' }]
@@ -118,16 +118,7 @@ class Map extends React.Component {
 
     return (
       <div>
-        <label>Latitude</label>
-        <input type="text"
-          ref={input => this.latInput = input}/><br/>
-        <label>Longitude</label>
-        <input type="text"
-          ref={input => this.lngInput = input}/>
-        <label>Zip Code</label>
-        <input type="text"
-          ref={input => this.zipCode = input}/>
-        <button onClick={() => this.update()}>Update</button>
+        
         <div className="map" ref={elm => this.mapElm = elm}>
         </div>
       </div>

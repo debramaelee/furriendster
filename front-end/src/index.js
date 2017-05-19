@@ -35,16 +35,25 @@ const store = Redux.createStore(
 );
 
 class AppLayout extends React.Component {
+  logout(event) {
+    event.preventDefault();
+    this.props.logout();
+
+  }
   render() {
     let loggedIn = !!this.props.loginInfo;
     return (
       <div>
         <ul className="nav">
           <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-
-            <li><Link to="/user/signup" activeClassName="active">Sign Up</Link></li>
-            <li><Link to="/user/login" activeClassName="active">Log In</Link></li> 
-          <li><Link to="/map" activeClassName="active">Map</Link></li>
+          {!loggedIn ?
+            [<li key ="signup"><Link to="/user/signup" activeClassName="active">Sign Up</Link></li>,
+            <li key="login"><Link to="/user/login" activeClassName="active">Log In</Link></li>] :
+            [<li key="map"><Link to="/map" activeClassName="active">Map</Link></li>,
+            <a href="#" onClick={event=>this.logout(event)}>Logout</a>,
+            <h4>Welcome back, {this.props.loginInfo.name}!</h4>
+          ]
+          }
         </ul>
         {this.props.children}
       </div>
@@ -55,13 +64,14 @@ class AppLayout extends React.Component {
 const AppLayoutContainer = ReactRedux.connect(
   state => ({
     loginInfo: state.login.loginInfo
-  })
+  }),
+  { logout: () => ({type: 'logout'})}
 ) (AppLayout);
 
 ReactDOM.render(
   <ReactRedux.Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={AppLayout}>
+      <Route path="/" component={AppLayoutContainer}>
         <IndexRoute component={HomeContainer}/>
         <Route path="/user/signup" component={SignupContainer}/>
         <Route path="/user/login" component={LoginContainer}/>
