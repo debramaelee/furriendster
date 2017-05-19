@@ -41,6 +41,68 @@ app.post('/api/user/signup', (req, resp, next) => {
     .catch(next);
 });
 
+// app.post('/api/petprofile', (req, resp, next) => {
+//   let data = req.body;
+  // let owner_id = 3;
+  //commented this out because it was breaking everything
+  // db.one(
+  //   `select id from owner_info join pet_info on owner_info.id = pet_info.owner_id`
+  // )
+//   .then(function(inserting){
+//       db.one(`
+//         insert into pet_info
+//         values (default, NULL, $1, $2, $3, $4, $5, $6, $7)
+//         returning owner_id, name, gender, fixed, age, size, personality, activities
+//         `,
+//         [
+//           data.name,
+//           data.gender,
+//           data.fixed,
+//           data.age,
+//           data.size,
+//           data.personality,
+//           data.activities
+//         ]
+//       )
+//     })
+//     .then(data => resp.json(data))
+//     .catch(next);
+// });
+
+// app.post('/api/petprofile', (req, resp, next) => {
+//
+//   console.log('pet info');
+//   let data = req.body;
+//   db.one(
+//     'select * from login_session where token = $1',
+//     token)
+//           return [
+//             login_session,
+//             db.one(
+//               `
+//                 insert into pet_info
+//                 values (default, $1, $2, $3, $4, $5, $6, $7, $8)
+//                 returning owner_id, name, gender, fixed, age, size, personality, activities
+//                 `,
+//                 [
+//                   owner_id,
+//                   data.name,
+//                   data.gender,
+//                   data.fixed,
+//                   data.age,
+//                   data.size,
+//                   data.personality,
+//                   data.activity
+//                 ]
+//             )
+//
+//
+//           ];
+//           // .then(data => resp.json(data))
+//           // .catch(next);
+//         })
+
+
 app.post('/api/user/login', (req, resp, next) => {
   let email = req.body.email;
   let password = req.body.password;

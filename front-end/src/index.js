@@ -20,12 +20,16 @@ import SignupContainer from './signup/Signup';
 import mapReducer from './map/Map.reducer';
 import MapContainer from './map/Map';
 
+import petprofileReducer from './petprofile/Petprofile.reducer';
+import PetprofileContainer from './petprofile/Petprofile';
+
 const reducer = Redux.combineReducers({
 
   home: homeReducer,
   login: loginReducer,
   signup: signupReducer,
-  map: mapReducer
+  map: mapReducer,
+  petprofile: petprofileReducer
 });
 
 const store = Redux.createStore(
@@ -50,6 +54,7 @@ class AppLayout extends React.Component {
             [<li key ="signup"><Link to="/user/signup" activeClassName="active">Sign Up</Link></li>,
             <li key="login"><Link to="/user/login" activeClassName="active">Log In</Link></li>] :
             [<li key="map"><Link to="/map" activeClassName="active">Map</Link></li>,
+            <li key="petprofile"><Link to="/petprofile" activeClassName="active">Pet Profile</Link></li>,
             <a href="#" onClick={event=>this.logout(event)}>Logout</a>,
             <h4>Welcome back, {this.props.loginInfo.name}!</h4>
           ]
@@ -76,6 +81,8 @@ ReactDOM.render(
         <Route path="/user/signup" component={SignupContainer}/>
         <Route path="/user/login" component={LoginContainer}/>
         <Route path="/map" component={MapContainer}/>
+        <Route path="/petprofile" component={PetprofileContainer}/>
+
       </Route>
     </Router>
   </ReactRedux.Provider>,
