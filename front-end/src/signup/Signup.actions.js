@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import {hashHistory} from 'react-router';
+import BASEURL from '../baseurl';
 
 
 
@@ -12,7 +13,7 @@ export function submitSignup(ownerInfo) {
   let asyncAction = function(dispatch) {
     $.ajax({
       method: 'POST',
-      url:`http://localhost:3003/api/user/signup/`,
+      url:`${BASEURL}/api/user/signup/`,
       data: JSON.stringify(ownerInfo),
       contentType: 'application/json'
     })
