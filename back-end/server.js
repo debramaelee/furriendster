@@ -97,6 +97,24 @@ app.post('/api/user/login', (req, resp, next) => {
     .catch(next);
 });
 
+app.get('/api/owner_info', (req, resp, next)=>{
+  db.any(
+    `select * from owner_info`
+  )
+  .then(data=> {
+    if (data) {
+    resp.json(data);
+  }
+  else {
+    resp.status(404);
+    resp.json({
+      message: "Data not found."
+    });
+  }
+})
+.catch(next);
+});
+
 
 
 

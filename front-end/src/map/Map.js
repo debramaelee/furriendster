@@ -60,9 +60,23 @@ class Map extends React.Component {
     });
   }
 
+  fetchLocations() {
+    function geocode(address) {
+      return new Promise(function(accept, reject) {
+        geocoder.geocode({'address': address}, (results, status) => {
+          accept(results);
+        });
+      })
+    }
+
+    
+
+  }
+
   componentDidMount() {
     var geocoder = new google.maps.Geocoder();
     let address = this.props.zip
+
     geocoder.geocode( { 'address': address}, (results, status)=>{
       let coord;
 
