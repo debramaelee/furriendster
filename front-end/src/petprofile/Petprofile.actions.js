@@ -13,7 +13,7 @@ export function submitPet(petInfo) {
   let asyncAction = function(dispatch) {
     $.ajax({
       method: 'POST',
-      url:`${BASEURL}/api/petprofile/`,
+      url:`${BASEURL}/api/petprofile`,
       data: JSON.stringify(petInfo),
       contentType: 'application/json'
     })

@@ -23,13 +23,18 @@ import MapContainer from './map/Map';
 import petprofileReducer from './petprofile/Petprofile.reducer';
 import PetprofileContainer from './petprofile/Petprofile';
 
+import petpageReducer from './petpage/Petpage.reducer';
+import PetpageContainer from './petpage/Petpage';
+
 const reducer = Redux.combineReducers({
 
   home: homeReducer,
   login: loginReducer,
   signup: signupReducer,
   map: mapReducer,
-  petprofile: petprofileReducer
+  petprofile: petprofileReducer,
+  petpage: petpageReducer
+
 });
 
 const store = Redux.createStore(
@@ -82,6 +87,7 @@ ReactDOM.render(
         <Route path="/user/login" component={LoginContainer}/>
         <Route path="/map" component={MapContainer}/>
         <Route path="/petprofile" component={PetprofileContainer}/>
+        <Route path="/petpage/:id" component={PetpageContainer}/>
 
       </Route>
     </Router>

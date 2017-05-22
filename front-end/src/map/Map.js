@@ -36,6 +36,18 @@ class Map extends React.Component {
       }
     });
 
+    var ownerMarker = new google.maps.Marker({
+      map: this.map,
+      position: new google.maps.LatLng(33.75, -84.38),
+      icon: {
+        url: 'https://image.flaticon.com/icons/png/512/12/12638.png',
+        anchor: new google.maps.Point(10, 10),
+        scaledSize: new google.maps.Size(50, 50)
+      }
+    });
+
+    // console.log('here is the markers: ' + marker.position + ownerMarker.position)
+
     google.maps.event.addListener(marker, 'click', ()=> {
       this.service.getDetails(place, (result, status)=> {
         if (status !== google.maps.places.PlacesServiceStatus.OK) {
@@ -92,8 +104,6 @@ class Map extends React.Component {
       lat: this.latInput.value,
       lng: this.lngInput.value
     };
-
-
     this.props.updateCenter(coord);
   }
 
@@ -118,7 +128,7 @@ class Map extends React.Component {
 
     return (
       <div>
-        
+
         <div className="map" ref={elm => this.mapElm = elm}>
         </div>
       </div>
