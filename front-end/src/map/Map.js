@@ -2,6 +2,7 @@ import React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as actions from './Map.actions';
 const google = window.google;
+import bluebird from 'bluebird';
 
 
 class Map extends React.Component {
@@ -24,6 +25,9 @@ class Map extends React.Component {
     this.service.radarSearch(request, callback);
   }
 
+///test insert
+
+///test insert
 
   addMarker(place) {
     var marker = new google.maps.Marker({
@@ -36,15 +40,7 @@ class Map extends React.Component {
       }
     });
 
-    var ownerMarker = new google.maps.Marker({
-      map: this.map,
-      position: new google.maps.LatLng(33.75, -84.38),
-      icon: {
-        url: 'https://image.flaticon.com/icons/png/512/12/12638.png',
-        anchor: new google.maps.Point(10, 10),
-        scaledSize: new google.maps.Size(50, 50)
-      }
-    });
+
 
     // console.log('here is the markers: ' + marker.position + ownerMarker.position)
 
@@ -61,26 +57,125 @@ class Map extends React.Component {
   }
 
   fetchLocations() {
+    var geocoder = new google.maps.Geocoder();
+    let addresses = [];
+    let allAddresses = this.props.addresses
+    for (var i = 0; i < allAddresses.length; i++) {
+      let street = allAddresses[i].street
+      let zip = allAddresses[i].zip
+      let streetzip = [street, zip]
+      addresses.splice(i, 0, streetzip)
+      console.log(addresses)
+
+      //attempt to run bluebird map when addresses becomes complete
+      // if (addresses.length === allAddresses.length) {
+      //
+      // }
+    }
+
+    // let addresses = [
+    //   '527 Main St Atlanta GA 30324',
+    //   '3453 Piedmont Atlanta GA',
+    //   '7301 Sloan Square Atlanta GA 30329'
+    // ]
+    // function findLat(){
+    //   return geometry.location.lat();
+    // }
+
+    bluebird.mapSeries(addresses, geocode)
+      .then(resultss => {
+        // var geocoder = new google.maps.Geocoder();
+        var arr=[]
+        for (var i = 0; i < addresses.length; i++){
+        let latitude = resultss[i][0].geometry.location.lat();
+        let longitude = resultss[i][0].geometry.location.lng();
+        let latlong = [latitude, longitude]
+        arr.splice(i, 0, latlong)
+
+        var ownerMarker = new google.maps.Marker({
+          map: this.map,
+          position: new google.maps.LatLng(latitude, longitude),
+          icon: {
+            url: 'https://image.flaticon.com/icons/png/512/12/12638.png',
+            anchor: new google.maps.Point(10, 10),
+            scaledSize: new google.maps.Size(50, 50)
+          }
+        });
+
+        console.log(arr)
+      }
+
+        // let longitude = resultss.map.geometry.location.lat();
+        //
+        // // var latitude = resultss[0].geometry.location.lat();
+        // // var longitude = resultss[0].geometry.location.lng();
+        // console.log(latitude, longitude);
+        //
+        //  let coord = {
+        //   lat: latitude,
+        //   lng: longitude
+        // }
+        // console.log('coord', coord);
+
+      });
     function geocode(address) {
       return new Promise(function(accept, reject) {
+        var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': address}, (results, status) => {
+          console.log('status', status);
           accept(results);
         });
       })
     }
 
-    
+
+    // geocode('kjkgkdjjgfhgfgfjfhfjdhfjdhfjjdfjdhjfhdjfhdfhd')
+    //   .then(results => {
+    //     console.log('results', results);
+    //   });
+
+
 
   }
 
-  componentDidMount() {
-    var geocoder = new google.maps.Geocoder();
+  initializeMap() {
+
     let address = this.props.zip
 
+    let map = this.map = new google.maps.Map(this.mapElm, {
+      zoom: 13,
+      styles: [{
+            stylers: [{ visibility: 'simplified' }]
+          }, {
+            elementType: 'labels',
+            stylers: [{ visibility: 'on' }]
+          }]
+    });
+
+    this.service = new google.maps.places.PlacesService(map);
+
+
+    this.center(address, () => {
+      this.map.addListener('idle', ()=>{
+        this.fetchLocations();
+        this.performSearch();
+      });
+    });
+
+    console.log('component mounting')
+
+    this.infoWindow = new google.maps.InfoWindow();
+
+    console.log('Map did mount');
+  }
+
+  center(address, callback) {
+    var geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': address}, (results, status)=>{
       let coord;
 
       if (status == google.maps.GeocoderStatus.OK) {
+        console.log('Got info');
         var latitude = results[0].geometry.location.lat();
         var longitude = results[0].geometry.location.lng();
         console.log(latitude, longitude);
@@ -89,28 +184,17 @@ class Map extends React.Component {
           lng: longitude
 
         };
-        let map = this.map = new google.maps.Map(this.mapElm, {
-          zoom: 13,
-          center: coord,
-          styles: [{
-                stylers: [{ visibility: 'simplified' }]
-              }, {
-                elementType: 'labels',
-                stylers: [{ visibility: 'on' }]
-              }]
-        });
-        this.service = new google.maps.places.PlacesService(map);
-        this.map.addListener('idle', ()=>this.performSearch());
-
+        this.map.setCenter(coord);
+        if (callback) {
+          callback();
         }
+      } else {
+        console.log('No info', status);
+      }
     });
-
-    console.log('component mounting')
-
-    this.infoWindow = new google.maps.InfoWindow();
-
-    console.log('Map did mount');
-
+  }
+  componentDidMount() {
+    this.initializeMap();
   }
 
    update(){
@@ -122,13 +206,19 @@ class Map extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // old props
+
+
     if (this.props.lat !== newProps.lat ||
         this.props.lng !== newProps.lng) {
       this.map.setCenter({
         lat: Number(newProps.lat),
         lng: Number(newProps.lng)
       });
+    }
+
+    if(this.props.zip !== newProps.zip) {
+      console.log('hello world')
+      this.center(newProps.zip);
     }
   }
 
@@ -139,7 +229,9 @@ class Map extends React.Component {
 
   render() {
     console.log(this.props.zip)
+    let allAddresses = this.props.addresses
 
+    console.log('HERE', allAddresses[0] && allAddresses[0].zip)
     return (
       <div>
 
@@ -156,7 +248,10 @@ const MapContainer = ReactRedux.connect(
     lat: state.map.lat,
     lng: state.map.lng,
     // login: state.login,
-    zip: state.login.loginInfo.zip
+    addresses: state.map.addresses,
+
+    // zips: state.map.addresses.zip,
+    zip: state.login.loginInfo && state.login.loginInfo.zip
   }),
 
   actions

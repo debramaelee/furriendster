@@ -8,6 +8,10 @@ import ReduxThunk from 'redux-thunk';
 
 import { Router, Route, Link, IndexLink, IndexRoute, hashHistory } from 'react-router';
 
+import { persistStore, autoRehydrate } from 'redux-persist'
+import CookieStorage from 'redux-persist-cookie-storage'
+
+
 import homeReducer from './home/Home.reducer';
 import HomeContainer from './home/Home';
 
@@ -40,8 +44,13 @@ const reducer = Redux.combineReducers({
 const store = Redux.createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  Redux.applyMiddleware(ReduxThunk)
+  Redux.compose(
+    Redux.applyMiddleware(ReduxThunk),
+    autoRehydrate()
+  )
 );
+
+persistStore(store, { storage: new CookieStorage() });
 
 class AppLayout extends React.Component {
   logout(event) {
@@ -60,8 +69,8 @@ class AppLayout extends React.Component {
             <li key="login"><Link to="/user/login" activeClassName="active">Log In</Link></li>] :
             [<li key="map"><Link to="/map" activeClassName="active">Map</Link></li>,
             <li key="petprofile"><Link to="/petprofile" activeClassName="active">Pet Profile</Link></li>,
-            <a href="#" onClick={event=>this.logout(event)}>Logout</a>,
-            <h4>Welcome back, {this.props.loginInfo.name}!</h4>
+            <a href="#" key="logout" onClick={event=>this.logout(event)}>Logout</a>,
+            <h4 key="welcome">Welcome back, {this.props.loginInfo.name}!</h4>
           ]
           }
         </ul>
