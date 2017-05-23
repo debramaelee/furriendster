@@ -24,6 +24,7 @@ class Map extends React.Component {
     }
     this.service.radarSearch(request, callback);
   }
+///need to pass in a string, not 2 objects
 
 ///test insert
 
@@ -63,7 +64,7 @@ class Map extends React.Component {
     for (var i = 0; i < allAddresses.length; i++) {
       let street = allAddresses[i].street
       let zip = allAddresses[i].zip
-      let streetzip = [street, zip]
+      let streetzip = street + ' ' + zip
       addresses.splice(i, 0, streetzip)
       console.log(addresses)
 
@@ -102,7 +103,6 @@ class Map extends React.Component {
           }
         });
 
-        console.log(arr)
       }
 
         // let longitude = resultss.map.geometry.location.lat();
