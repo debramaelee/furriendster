@@ -11,7 +11,6 @@ import { Router, Route, Link, IndexLink, IndexRoute, hashHistory } from 'react-r
 import { persistStore, autoRehydrate } from 'redux-persist'
 import CookieStorage from 'redux-persist-cookie-storage'
 
-
 import homeReducer from './home/Home.reducer';
 import HomeContainer from './home/Home';
 
@@ -30,6 +29,10 @@ import PetprofileContainer from './petprofile/Petprofile';
 import petpageReducer from './petpage/Petpage.reducer';
 import PetpageContainer from './petpage/Petpage';
 
+
+import ownerpageReducer from './ownerpage/Ownerpage.reducer';
+import OwnerpageContainer from './ownerpage/Ownerpage';
+
 const reducer = Redux.combineReducers({
 
   home: homeReducer,
@@ -37,7 +40,8 @@ const reducer = Redux.combineReducers({
   signup: signupReducer,
   map: mapReducer,
   petprofile: petprofileReducer,
-  petpage: petpageReducer
+  petpage: petpageReducer,
+  ownerpage: ownerpageReducer
 
 });
 
@@ -97,6 +101,7 @@ ReactDOM.render(
         <Route path="/map" component={MapContainer}/>
         <Route path="/petprofile" component={PetprofileContainer}/>
         <Route path="/petpage/:id" component={PetpageContainer}/>
+        <Route path="/ownerpage/:id" component={OwnerpageContainer}/>
 
       </Route>
     </Router>

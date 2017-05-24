@@ -10,6 +10,28 @@ export function updateCenter(center) {
   };
 }
 
+export function getPet(id) {
+  let asyncAction = function(dispatch) {
+    $.get(`${BASEURL}/api/petpage`)
+    .then(data=>{
+      dispatch({
+        type: 'petinfo',
+        payload: data
+      })
+    })
+    .catch(resp=> {
+      let error = (resp.responseJSON &&
+        resp.responseJSON.message) ||
+        resp.responseText;
+      dispatch({
+        type: 'petinfo-error',
+        error: error
+      });
+    });
+  };
+  return asyncAction;
+  }
+
 export function getLocations() {
   let asyncAction = function(dispatch) {
     $.get(`${BASEURL}/api/owner_info/`)

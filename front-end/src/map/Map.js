@@ -60,13 +60,15 @@ class Map extends React.Component {
   fetchLocations() {
     var geocoder = new google.maps.Geocoder();
     let addresses = [];
+    let addressid = [];
     let allAddresses = this.props.addresses
     for (var i = 0; i < allAddresses.length; i++) {
       let street = allAddresses[i].street
       let zip = allAddresses[i].zip
+      let id = allAddresses[i].id
       let streetzip = street + ' ' + zip
       addresses.splice(i, 0, streetzip)
-      console.log(addresses)
+
 
       //attempt to run bluebird map when addresses becomes complete
       // if (addresses.length === allAddresses.length) {
@@ -87,23 +89,43 @@ class Map extends React.Component {
       .then(resultss => {
         // var geocoder = new google.maps.Geocoder();
         var arr=[]
-        for (var i = 0; i < addresses.length; i++){
-        let latitude = resultss[i][0].geometry.location.lat();
-        let longitude = resultss[i][0].geometry.location.lng();
-        let latlong = [latitude, longitude]
-        arr.splice(i, 0, latlong)
-
-        var ownerMarker = new google.maps.Marker({
-          map: this.map,
-          position: new google.maps.LatLng(latitude, longitude),
-          icon: {
-            url: 'https://image.flaticon.com/icons/png/512/12/12638.png',
-            anchor: new google.maps.Point(10, 10),
-            scaledSize: new google.maps.Size(50, 50)
+        for (let i = 0; i < addresses.length; i++){
+        // addresses.forEach((results, i)=>{
+          let id = allAddresses[i].id;
+          let name = allAddresses[i].name;
+          if (resultss[i] == null) {
+            console.log('here ' , i, resultss)
           }
-        });
+          let latitude = resultss[i][0].geometry.location.lat();
+          let longitude = resultss[i][0].geometry.location.lng();
+          let latlong = [latitude, longitude]
+          arr.splice(i, 0, latlong)
 
-      }
+          let infowindow = new google.maps.InfoWindow({
+            content: `<a href="#/ownerpage/${id}">${name}</a>`
+          });
+
+          let ownerMarker = new google.maps.Marker({
+            url: "#",
+            map: this.map,
+            position: new google.maps.LatLng(latitude, longitude),
+            icon: {
+              url: 'https://image.flaticon.com/icons/png/512/12/12638.png',
+              anchor: new google.maps.Point(10, 10),
+              scaledSize: new google.maps.Size(30, 30)
+            },
+            infoWindow: {
+              content: '<p>hello</p>'
+            }
+          });
+
+          ownerMarker.addListener('click', function() {
+            infowindow.open(this.map, ownerMarker);
+            console.log('You clicked!'+  longitude + ' ' + latitude + ' ' + id)
+
+          });
+
+        }
 
         // let longitude = resultss.map.geometry.location.lat();
         //
@@ -117,6 +139,9 @@ class Map extends React.Component {
         // }
         // console.log('coord', coord);
 
+      })
+      .catch (err=>{
+        console.log(err.stack)
       });
     function geocode(address) {
       return new Promise(function(accept, reject) {
@@ -157,9 +182,10 @@ class Map extends React.Component {
 
     this.center(address, () => {
       this.map.addListener('idle', ()=>{
-        this.fetchLocations();
+
         this.performSearch();
       });
+      this.fetchLocations();
     });
 
     console.log('component mounting')
@@ -217,7 +243,6 @@ class Map extends React.Component {
     }
 
     if(this.props.zip !== newProps.zip) {
-      console.log('hello world')
       this.center(newProps.zip);
     }
   }

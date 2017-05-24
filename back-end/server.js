@@ -35,6 +35,23 @@ app.get('/api/petpage/:id', (req, resp, next)=> {
   .catch(next);
 });
 
+app.get('/api/ownerpage/:id', (req, resp, next)=> {
+  let id = req.params.id;
+  db.oneOrNone(`select * from owner_info where id = $1`, id)
+    .then(data=> {
+      if (data) {
+      resp.json(data);
+    }
+    else {
+      resp.status(404);
+      resp.json({
+        message: "Owner not found."
+      });
+    }
+  })
+  .catch(next);
+});
+
 app.post('/api/user/signup', (req, resp, next) => {
   let data = req.body;
   bcrypt.hash(data.password, 10)
@@ -157,6 +174,15 @@ app.post('/api/petprofile', (req, resp, next)=>{
     (default, $1, $2, $3, $4, $5, $6, $7, $8)
     returning * `, [ownerId, data.name, data.gender, data.fixed, data.age, data.size, data.personality, data.activities])
     .then(data =>resp.json(data))
+    .catch(next);
+});
+
+app.get('/api/petpage', (req, resp, next)=>{
+  let ownerId = id;
+  db.any(`
+    select * from pet_info where owner_id = $1`,
+    [ownerId])
+    .then(data=>resp.json(data))
     .catch(next);
 });
 
