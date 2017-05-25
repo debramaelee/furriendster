@@ -37,6 +37,8 @@ if (this.props.owner_info){
       <div className="owner-bio">
 
         <h4>Meet {ownerName}s Pets</h4>
+        <h4> hello</h4>
+
 
 
 
@@ -50,6 +52,7 @@ if (this.props.owner_info){
 
 const OwnerpageContainer = ReactRedux.connect(
   state => state.ownerpage,
+
   actions
 )(Ownerpage);
 

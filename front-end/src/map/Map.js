@@ -113,9 +113,6 @@ class Map extends React.Component {
               url: 'https://image.flaticon.com/icons/png/512/12/12638.png',
               anchor: new google.maps.Point(10, 10),
               scaledSize: new google.maps.Size(30, 30)
-            },
-            infoWindow: {
-              content: '<p>hello</p>'
             }
           });
 
