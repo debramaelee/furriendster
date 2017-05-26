@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   // put properties you need here
 owner_info: null,
-pet_info: null
+pet_info: []
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
