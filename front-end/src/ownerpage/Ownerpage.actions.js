@@ -32,9 +32,11 @@ export function getOwnerInfo(id) {
 }
 
 
-export function getPet(id) {
+export function getPet(id, token) {
   let asyncAction = function(dispatch) {
-    $.get(`${BASEURL}/api/petpage`)
+    $.get(`${BASEURL}/api/allpets/`+ id, {
+      token: token
+    })
     .then(data=>{
       dispatch({
         type: 'petinfo',

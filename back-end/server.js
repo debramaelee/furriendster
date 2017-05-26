@@ -52,6 +52,8 @@ app.get('/api/ownerpage/:id', (req, resp, next)=> {
   .catch(next);
 });
 
+
+
 app.post('/api/user/signup', (req, resp, next) => {
   let data = req.body;
   bcrypt.hash(data.password, 10)
@@ -134,7 +136,7 @@ app.get('/api/owner_info', (req, resp, next)=>{
 
 
 
-
+//anything in authorization needs a token either in actions page or in server.js
 function respondUnauthorized(resp) {
 
 
@@ -145,7 +147,7 @@ function respondUnauthorized(resp) {
 }
 
 app.use(function authorization(req, resp, next) {
-  let token = req.body.token;
+  let token = req.query.token || req.body.token;
   // let token = loginSession.token;
   console.log(token)
 
@@ -177,8 +179,9 @@ app.post('/api/petprofile', (req, resp, next)=>{
     .catch(next);
 });
 
-app.get('/api/petpage', (req, resp, next)=>{
-  let ownerId = id;
+app.get('/api/allpets/:owner_id', (req, resp, next)=>{
+  let ownerId = req.params.owner_id;
+  console.log('hello');
   db.any(`
     select * from pet_info where owner_id = $1`,
     [ownerId])

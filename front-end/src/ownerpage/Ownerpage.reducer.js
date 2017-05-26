@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   // put properties you need here
-owner_info: null
+owner_info: null,
+pet_info: null
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -11,9 +12,14 @@ export default function reducer(state = INITIAL_STATE, action) {
 
   return Object.assign({}, state, {
     owner_info: action.payload
+    })
+  }
 
-  });
-}
+  if(action.type === 'petinfo'){
+    return Object.assign({}, state, {
+      pet_info: action.payload
+    });
+  }
 
 return state;
 }
