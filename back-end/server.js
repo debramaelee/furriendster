@@ -8,6 +8,8 @@ const db = pgp(dbConfig);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const cloudinary = require('cloudinary');
+const fs = require('fs');
 var numSaltRounds = 10;
 
 const cors = require('cors');
@@ -173,15 +175,17 @@ app.post('/api/petprofile', (req, resp, next)=>{
   let ownerId = req.loginSession.owner_id;
   db.one(`
     insert into pet_info values
-    (default, $1, $2, $3, $4, $5, $6, $7, $8)
-    returning * `, [ownerId, data.name, data.gender, data.fixed, data.age, data.size, data.personality, data.activities])
+    (default, $1, $2, $3, $4, $5, $6, $7, $8, $9)
+    returning * `, [ownerId, data.name, data.gender, data.fixed, data.age, data.size, data.personality, data.activities, data.image_url])
     .then(data =>resp.json(data))
     .catch(next);
 });
 
+
+
 app.get('/api/allpets/:owner_id', (req, resp, next)=>{
   let ownerId = req.params.owner_id;
-  console.log('hello');
+
   db.any(`
     select * from pet_info where owner_id = $1`,
     [ownerId])

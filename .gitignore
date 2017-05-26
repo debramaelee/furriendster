@@ -22,4 +22,4 @@ yarn-error.log*
 db-config
 /back-end/db-config
 
-
+/back-end/cloudinary.config

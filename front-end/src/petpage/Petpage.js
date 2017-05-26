@@ -2,6 +2,7 @@ import React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as actions from './Petpage.actions';
 
+
 class Petpage extends React.Component {
   componentDidMount() {
     let id = this.props.params.id;
@@ -14,6 +15,7 @@ class Petpage extends React.Component {
       this.props.getPetInfo(id);
     }
   }
+
 
 
   render() {

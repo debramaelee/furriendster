@@ -9,6 +9,8 @@ export function pageError(resp) {
   return {type: 'pageError', error: error};
 }
 
+
+
 export function getPetInfo(id) {
   let asyncAction = function(dispatch) {
     $.get(`${BASEURL}/api/petpage/` + id)

@@ -8,6 +8,12 @@ export function pageError(resp) {
   let error=(resp && resp.responseJSON && resp.responseJSON.message) || 'Something went wrong!';
   return {type: 'pageError', error: error};
 }
+//working on upload 
+export function upload(images){
+  return {
+    type: "images"
+  }
+}
 
 export function submitPet(petInfo) {
   let asyncAction = function(dispatch) {

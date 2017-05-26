@@ -7,7 +7,8 @@ const INITIAL_STATE = {
   size: 'small',
   personality: 'energetic',
   activities: 'fetch',
-  petInfo: []
+  petInfo: [],
+  images: []
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -68,6 +69,12 @@ if (action.type === 'activity'){
 if (action.type === 'size'){
   return Object.assign({}, state, {
     size: action.data,
+  });
+}
+
+if (action.type === 'gallery'){
+  return Object.assign({}, state, {
+    gallery: action.data,
   });
 }
 
