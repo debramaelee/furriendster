@@ -8,12 +8,13 @@ import bluebird from 'bluebird';
 class Map extends React.Component {
 
   performSearch() {
+
     var request = {
       bounds: this.map.getBounds(),
       keyword: 'dog park'
     };
-    let callback=(results, status) => {
 
+    let callback = (results, status) => {
       if (status !== google.maps.places.PlacesServiceStatus.OK) {
         console.error(status);
         return;
@@ -22,7 +23,10 @@ class Map extends React.Component {
         this.addMarker(result);
       }
     }
+
     this.service.radarSearch(request, callback);
+
+
   }
 ///need to pass in a string, not 2 objects
 
@@ -57,24 +61,24 @@ class Map extends React.Component {
     });
   }
 
-  fetchLocations() {
-    var geocoder = new google.maps.Geocoder();
-    let addresses = [];
-    let addressid = [];
-    let allAddresses = this.props.addresses
-    for (var i = 0; i < allAddresses.length; i++) {
-      let street = allAddresses[i].street
-      let zip = allAddresses[i].zip
-      let id = allAddresses[i].id
-      let streetzip = street + ' ' + zip
-      addresses.splice(i, 0, streetzip)
-
-
-      //attempt to run bluebird map when addresses becomes complete
-      // if (addresses.length === allAddresses.length) {
-      //
-      // }
-    }
+  fetchLocations(addresses) {
+    console.log('hello!');
+    let geocoder = new google.maps.Geocoder();
+    // let addressid = [];
+    // // let allAddresses = this.props.addresses
+    // for (let i = 0; i < allAddresses.length; i++) {
+    //   // let street = allAddresses[i].street
+    //   // let zip = allAddresses[i].zip
+    //   // let id = allAddresses[i].id
+    //   // let streetzip = street + ' ' + zip
+    //   // addresses.splice(i, 0, streetzip)
+    //
+    //
+    //   //attempt to run bluebird map when addresses becomes complete
+    //   // if (addresses.length === allAddresses.length) {
+    //   //
+    //   // }
+    // }
 
     // let addresses = [
     //   '527 Main St Atlanta GA 30324',
@@ -85,14 +89,16 @@ class Map extends React.Component {
     //   return geometry.location.lat();
     // }
 
+
     bluebird.mapSeries(addresses, geocode)
       .then(resultss => {
+        console.log('addresses', addresses);
         // var geocoder = new google.maps.Geocoder();
-        var arr=[]
+        let arr=[]
         for (let i = 0; i < addresses.length; i++){
         // addresses.forEach((results, i)=>{
-          let id = allAddresses[i].id;
-          let name = allAddresses[i].name;
+          let id = addresses[i].id;
+          let name = addresses[i].name;
           if (resultss[i] == null) {
             console.log('here ' , i, resultss)
           }
@@ -143,10 +149,16 @@ class Map extends React.Component {
     function geocode(address) {
       return new Promise(function(accept, reject) {
         var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({'address': address}, (results, status) => {
-          console.log('status', status);
-          accept(results);
-        });
+        setTimeout(function() {
+          geocoder.geocode({'address': address.street + ' ' + address.zip}, (results, status) => {
+            console.log('status', status);
+            if (status === 'OVER_QUERY_LIMIT') {
+              reject(new Error('Over query limit'));
+            } else {
+              accept(results);
+            }
+          });
+        }, 1000);
       })
     }
 
@@ -182,7 +194,7 @@ class Map extends React.Component {
 
         this.performSearch();
       });
-      this.fetchLocations();
+
     });
 
     console.log('component mounting')
@@ -217,10 +229,13 @@ class Map extends React.Component {
     });
   }
   componentDidMount() {
+
     this.initializeMap();
+    this.props.getLocations();
   }
 
    update(){
+
     let coord = {
       lat: this.latInput.value,
       lng: this.lngInput.value
@@ -242,6 +257,10 @@ class Map extends React.Component {
     if(this.props.zip !== newProps.zip) {
       this.center(newProps.zip);
     }
+    if(this.props.addresses !== newProps.addresses){
+      console.log('fetching locations');
+      this.fetchLocations(newProps.addresses);
+    }
   }
 
   componentWillUnmount() {
@@ -250,10 +269,10 @@ class Map extends React.Component {
   }
 
   render() {
-    console.log(this.props.zip)
+
     let allAddresses = this.props.addresses
 
-    console.log('HERE', allAddresses[0] && allAddresses[0].zip)
+    console.log('HERE', allAddresses[0] && allAddresses[0].zip);
     return (
       <div>
 
@@ -271,6 +290,7 @@ const MapContainer = ReactRedux.connect(
     lng: state.map.lng,
     // login: state.login,
     addresses: state.map.addresses,
+    name: state.map.name,
 
     // zips: state.map.addresses.zip,
     zip: state.login.loginInfo && state.login.loginInfo.zip

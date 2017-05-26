@@ -118,7 +118,7 @@ app.post('/api/user/login', (req, resp, next) => {
 
 app.get('/api/owner_info', (req, resp, next)=>{
   db.any(
-    `select id, street, zip from owner_info`
+    `select name, id, street, zip from owner_info`
   )
   .then(data=> {
     if (data) {

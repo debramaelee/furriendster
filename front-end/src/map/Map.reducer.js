@@ -16,10 +16,10 @@ export default function reducer(state = INITIAL_STATE, action) {
   //     loginInfo: this.props.data
   //   })
   // }
-  // if(action.type === 'usermap'){
-  //   return Object.assign({}, state, {
-  //     addresses: action.payload
-  //   })
-  // }
+  if(action.type === 'usermap'){
+    return Object.assign({}, state, {
+      addresses: action.payload
+    })
+  }
   return state;
 }
