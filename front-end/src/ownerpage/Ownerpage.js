@@ -48,10 +48,14 @@ if (this.props.owner_info){
         {this.props.pet_info.map((petInfo, idx)=>
         <li key={idx}>
           <a href={`/#/petpage/${petInfo.id}`} target="_blank"><img src={petInfo.image_url.replace(/[{}]/g, "")} width="200px" /></a>
-
         </li>
-      )}
 
+      )}
+      <h3>Message Board</h3>
+      <form>
+        <textarea cols="50" rows="5"/>
+        <button>Submit</button>
+      </form>
 
 
       </div>
