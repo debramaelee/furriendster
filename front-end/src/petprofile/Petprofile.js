@@ -1,8 +1,7 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
 import * as actions from './Petprofile.actions';
-import {CloudinaryContext, Transformation, Image} from 'cloudinary-react';
-const cloudinary = window.cloudinary;
+
 
 
 class Petprofile extends React.Component {
@@ -25,20 +24,13 @@ class Petprofile extends React.Component {
         size: this.props.size,
         personality: this.props.personality,
         activities: this.props.activities,
+        image_url: this.props.img
 
       }
 
       this.props.submitPet(petInfo);
   }
-  uploadWidget(){
-    cloudinary.openUploadWidget({
-      cloud_name: 'dieot0dcp',
-      upload_preset: 'PRESET',
-      tags:['dogs']},
-      function(error, result){
-        console.log(result);
-      });
-  }
+
 
 
 
@@ -85,15 +77,11 @@ class Petprofile extends React.Component {
             <option value="run" >Running and Chasing</option>
             <option value="tug" >Tug of War</option>
           </select><br/>
-
+          <button onClick={event=>this.props.uploadImage(event.target.value)}>
+          <h1> add image</h1>
+          </button><br/>
           <button onSubmit={event=>this.submit(event)}>Submit!</button>
         </form>
-        <div className="upload">
-          <button onClick={this.uploadWidget.bind(this)}>
-          <h1> add image</h1>
-          </button>
-
-        </div>
       </div>
     );
   }

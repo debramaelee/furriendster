@@ -7,8 +7,8 @@ const INITIAL_STATE = {
   size: 'small',
   personality: 'energetic',
   activities: 'fetch',
-  petInfo: [],
-  images: []
+  image_url: '',
+
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -72,9 +72,16 @@ if (action.type === 'size'){
   });
 }
 
-if (action.type === 'gallery'){
+if (action.type === 'imageUploadComplete'){
   return Object.assign({}, state, {
-    gallery: action.data,
+    img: action.value,
+    error: null
+  });
+}
+
+if (action.type === 'imageUploadError'){
+  return Object.assign({}, state, {
+    error: action.value
   });
 }
 

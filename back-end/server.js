@@ -172,6 +172,7 @@ app.use(function authorization(req, resp, next) {
 
 app.post('/api/petprofile', (req, resp, next)=>{
   let data = req.body;
+  let value = req.value;
   let ownerId = req.loginSession.owner_id;
   db.one(`
     insert into pet_info values

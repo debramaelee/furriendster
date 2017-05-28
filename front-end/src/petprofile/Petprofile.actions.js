@@ -1,17 +1,35 @@
 import $ from 'jquery';
 import {hashHistory} from 'react-router';
 import BASEURL from '../baseurl';
-
+const cloudinary = window.cloudinary;
 
 
 export function pageError(resp) {
   let error=(resp && resp.responseJSON && resp.responseJSON.message) || 'Something went wrong!';
   return {type: 'pageError', error: error};
 }
-//working on upload 
-export function upload(images){
-  return {
-    type: "images"
+//working on upload
+export function uploadImage(event){
+  return function(dispatch){
+    cloudinary.openUploadWidget({cloud_name: 'dieot0dcp', upload_preset: 'tgihapgh', max_file_size: 750000},
+      function(error, result) {
+        if(result !== undefined){
+          let urls = []
+          result.forEach((result)=>{
+            urls.push(result.url)
+          })
+          dispatch({
+            type: "imageUploadComplete",
+            value: urls
+          })
+        }else{
+          dispatch({
+            type: "imageUploadError",
+            value: error.message
+          })
+        }
+
+      });
   }
 }
 
