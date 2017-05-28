@@ -26,6 +26,7 @@ class Ownerpage extends React.Component {
 let ownerName;
 let petName;
 let petId;
+let petImage;
 
 // if(!pet_info) {
 //   return <h1>Loading...</h1>;
@@ -33,6 +34,7 @@ let petId;
 if (this.props.owner_info){
   ownerName = this.props.owner_info.name;
   petName = this.props.pet_info.name;
+  petImage = this.props.pet_info.image_url;
 }
 
 
@@ -45,7 +47,8 @@ if (this.props.owner_info){
         <h4>Meet {ownerName}s Pets</h4>
         {this.props.pet_info.map((petInfo, idx)=>
         <li key={idx}>
-          <a href={`/#/petpage/${petInfo.id}`}>{petInfo.name}</a>
+          <a href={`/#/petpage/${petInfo.id}`}><img src={petInfo.image_url.replace(/[{}]/g, "")} width="200px"/></a>
+
         </li>
       )}
 
