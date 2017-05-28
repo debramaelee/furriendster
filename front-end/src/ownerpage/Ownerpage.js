@@ -47,7 +47,7 @@ if (this.props.owner_info){
         <h4>Meet {ownerName}s Pets</h4>
         {this.props.pet_info.map((petInfo, idx)=>
         <li key={idx}>
-          <a href={`/#/petpage/${petInfo.id}`}><img src={petInfo.image_url.replace(/[{}]/g, "")} width="200px"/></a>
+          <a href={`/#/petpage/${petInfo.id}`} target="_blank"><img src={petInfo.image_url.replace(/[{}]/g, "")} width="200px" /></a>
 
         </li>
       )}
