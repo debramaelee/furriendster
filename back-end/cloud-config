@@ -1,0 +1,5 @@
+module.exports = {
+  cloud_name: ‘debra’, 
+  api_key: '115772446423712', 
+  api_secret: 'PAGBXnPJPYb03aVhPJWm9e_klJY' 
+};

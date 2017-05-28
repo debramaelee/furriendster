@@ -77,11 +77,12 @@ class Petprofile extends React.Component {
             <option value="run" >Running and Chasing</option>
             <option value="tug" >Tug of War</option>
           </select><br/>
-          <button onClick={event=>this.props.uploadImage(event.target.value)}>
-          <h1> add image</h1>
-          </button><br/>
+
           <button onSubmit={event=>this.submit(event)}>Submit!</button>
         </form>
+        <button onClick={event=>this.props.uploadImage(event.target.value)}>
+        <h1> add image</h1>
+        </button><br/>
       </div>
     );
   }

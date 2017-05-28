@@ -26,6 +26,8 @@ let petAge;
 let petSize;
 let petPersonality;
 let petActivities;
+let petImage;
+let imgLength;
 
 // if(!pet_info) {
 //   return <h1>Loading...</h1>;
@@ -37,6 +39,7 @@ if (this.props.pet_info){
   petSize = this.props.pet_info.size;
   petPersonality = this.props.pet_info.personality;
   petActivities = this.props.pet_info.activities;
+  petImage = (this.props.pet_info.image_url).replace(/[{}]/g, "");
 
   if(this.props.pet_info.fixed){
     petFixed = 'I am fixed';
@@ -48,6 +51,7 @@ if (this.props.pet_info){
 
 
 console.log('here is the pet Info' + this.props.pet_info);
+console.log(petImage);
 
     return (
       <div className="pet-bio">
@@ -59,7 +63,7 @@ console.log('here is the pet Info' + this.props.pet_info);
         <p>I am {petPersonality} and I love to {petActivities}.</p>
 
 
-        <img src="http://orig10.deviantart.net/68a0/f/2013/309/6/a/profile_picture_by_fruit_juice_dog-d6t7bul.png" width="200px"/>
+        <img src={petImage} width="200px"/>
 
       </div>
     );
