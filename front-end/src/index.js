@@ -75,7 +75,7 @@ class AppLayout extends React.Component {
             <li key="login"><Link to="/user/login" activeClassName="active">Log In</Link></li>] :
             [<li key="map"><Link to="/map" activeClassName="active">Map</Link></li>,
             <li key="petprofile"><Link to="/petprofile" activeClassName="active">Add Pet Profile</Link></li>,
-            // <li key="yourprofile"><Link to="/ownerpage/" activeClassName="active">Your Current Pets</Link></li>,
+            <li key="yourprofile"><Link to={"/ownerpage/"+this.props.loginInfo.id} activeClassName="active">Your Current Pets</Link></li>,
             <a href="#" key="logout" onClick={event=>this.logout(event)}>Logout</a>,
             <h4 key="welcome">Welcome back, {this.props.loginInfo.name}!</h4>
           ]

@@ -107,6 +107,7 @@ app.post('/api/user/login', (req, resp, next) => {
       .spread((owner_info, loginSession) => {
         resp.json({
           name: owner_info.name,
+          id: owner_info.id,
           email: owner_info.email,
           phone: owner_info.phone,
           street: owner_info.street,

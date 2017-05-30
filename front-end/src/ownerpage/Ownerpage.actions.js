@@ -9,9 +9,9 @@ export function pageError(resp) {
   return {type: 'pageError', error: error};
 }
 
-export function getOwnerInfo(id) {
+export function getOwnerInfo(id, token) {
   let asyncAction = function(dispatch) {
-    $.get(`${BASEURL}/api/ownerpage/` + id)
+    $.get(`${BASEURL}/api/ownerpage/` + id, {token})
     .then(data=> {
       dispatch({
         type: 'ownerpage',

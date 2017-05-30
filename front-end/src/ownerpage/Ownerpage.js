@@ -5,8 +5,10 @@ import * as actions from './Ownerpage.actions';
 class Ownerpage extends React.Component {
   componentDidMount() {
     let id = this.props.params.id;
-    this.props.getOwnerInfo(id);
-    this.props.getPet(id, this.props.token);
+    if (this.props.token) {
+      this.props.getOwnerInfo(id, this.props.token);
+      this.props.getPet(id, this.props.token);
+    }
 
 
 
@@ -47,7 +49,12 @@ if (this.props.owner_info){
         <h4>Meet {ownerName}s Pets</h4>
         {this.props.pet_info.map((petInfo, idx)=>
         <li key={idx}>
-          <a href={`/#/petpage/${petInfo.id}`} target="_blank"><img src={petInfo.image_url.replace(/[{}]/g, "")} width="200px" /></a>
+
+            {petInfo.image_url ?
+              <a href={`/#/petpage/${petInfo.id}`} target="_blank">
+              <img src={petInfo.image_url.replace(/[{}]/g, "")} width="200px" /></a> : <p>Image not found!</p>
+            }
+
         </li>
 
       )}
