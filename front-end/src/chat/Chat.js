@@ -1,8 +1,8 @@
 import React from 'react';
 import * as ReactRedux from 'react-redux';
-import * as actions from './Ownerpage.actions';
+import * as actions from './Chat.actions';
 
-class Ownerpage extends React.Component {
+class Chat extends React.Component {
   componentDidMount() {
     let id = this.props.params.id;
     if (this.props.token) {
@@ -71,7 +71,7 @@ if (this.props.owner_info){
 
 }
 
-const OwnerpageContainer = ReactRedux.connect(
+const ChatContainer = ReactRedux.connect(
   state => ({
     owner_info: state.ownerpage.owner_info,
     pet_info: state.ownerpage.pet_info,
@@ -79,6 +79,6 @@ const OwnerpageContainer = ReactRedux.connect(
     token: state.login.loginInfo && state.login.loginInfo.auth_token
   }),
   actions
-)(Ownerpage);
+)(Chat);
 
-export default OwnerpageContainer;
+export default ChatContainer;

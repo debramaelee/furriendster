@@ -29,9 +29,12 @@ import PetprofileContainer from './petprofile/Petprofile';
 import petpageReducer from './petpage/Petpage.reducer';
 import PetpageContainer from './petpage/Petpage';
 
-
 import ownerpageReducer from './ownerpage/Ownerpage.reducer';
 import OwnerpageContainer from './ownerpage/Ownerpage';
+
+
+import chatReducer from './chat/Chat.reducer';
+import ChatContainer from './chat/Chat';
 
 const reducer = Redux.combineReducers({
 
@@ -41,7 +44,8 @@ const reducer = Redux.combineReducers({
   map: mapReducer,
   petprofile: petprofileReducer,
   petpage: petpageReducer,
-  ownerpage: ownerpageReducer
+  ownerpage: ownerpageReducer,
+  chatpage: chatReducer
 
 });
 
@@ -74,6 +78,7 @@ class AppLayout extends React.Component {
             [<li key ="signup"><Link to="/user/signup" activeClassName="active">Sign Up</Link></li>,
             <li key="login"><Link to="/user/login" activeClassName="active">Log In</Link></li>] :
             [<li key="map"><Link to="/map" activeClassName="active">Map</Link></li>,
+            <li key="chat"><Link to="/chat" activeClassName="active">Chat</Link></li>,
             <li key="petprofile"><Link to="/petprofile" activeClassName="active">Add Pet Profile</Link></li>,
             <li key="yourprofile"><Link to={"/ownerpage/"+this.props.loginInfo.id} activeClassName="active">Your Current Pets</Link></li>,
             <a href="#" key="logout" onClick={event=>this.logout(event)}>Logout</a>,
@@ -105,6 +110,7 @@ ReactDOM.render(
         <Route path="/petprofile" component={PetprofileContainer}/>
         <Route path="/petpage/:id" component={PetpageContainer}/>
         <Route path="/ownerpage/:id" component={OwnerpageContainer}/>
+        <Route path="/chat" component={ChatContainer}/>
 
       </Route>
     </Router>
