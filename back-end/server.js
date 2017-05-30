@@ -16,6 +16,24 @@ const cors = require('cors');
 
 const app = express();
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+io.sockets.on('connection',function(socket){
+    console.log("Connected: %s",socket.id);
+
+    socket.on('commentlist',(payload)=>{
+        console.log(payload);
+        console.log("recieved");
+        this.emit('commentlist',payload);
+
+
+    })
+
+
+});
+
+
 app.use(cors())
 
 app.use(bodyParser.json());
@@ -257,10 +275,4 @@ app.get('/api/allpets/:owner_id', (req, resp, next)=>{
 //         })
 
 
-
-
-
-
-
-
-app.listen(3003, () => console.log('Listening on 3003.'));
+http.listen(3003, () => console.log('Listening on 3003.'));
