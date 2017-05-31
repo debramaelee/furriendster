@@ -20,18 +20,60 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
 io.sockets.on('connection',function(socket){
-    console.log("Connected: %s",socket.id);
+  db.any(`
+    select * from (select timestamp, text, owner_name, owner_id from chat_room order by timestamp desc limit 10) as foo order by timestamp asc
+    `)
+    .then(data=>socket.emit('commentlist', data))
+    // .catch(next)
 
-    socket.on('commentlist',(payload)=>{
-        console.log(payload);
+  // db.one(`
+  //   select owner_name from chat_room where owner_id = $1`,
+  //   [message.owner_id])
+  //   .then(data=>socket.emit('commentlist', data))
+
+    socket.on('join', function(name){
+      socket.name = name;
+      console.log(socket.name)
+    })
+    console.log("Connected: %s",socket.id);
+    // socket.on('check', function(incoming) {
+    //   users[incoming.id] = socket.id
+    // })
+    socket.on('commentlist',(payload, next)=>{
+        console.log('here is payload' , payload);
         console.log("recieved");
-        this.emit('commentlist',payload);
+
+        let message = payload[payload.length-1];
+
+          db.one(`
+            insert into chat_room values
+            ($1, $2, $3, default, $4)`,
+            [message.owner_id, socket.id, message.text, message.owner_name])
+            .then(data=>resp.json(data))
+            .catch(next)
+
 
 
     })
 
 
 });
+
+
+
+///delete
+// app.post('/api/petprofile', (req, resp, next)=>{
+//   let data = req.body;
+//   let value = req.value;
+//   let ownerId = req.loginSession.owner_id;
+//   db.one(`
+//     insert into pet_info values
+//     (default, $1, $2, $3, $4, $5, $6, $7, $8, $9)
+//     returning * `, [ownerId, data.name, data.gender, data.fixed, data.age, data.size, data.personality, data.activities, data.image_url])
+//     .then(data =>resp.json(data))
+//     .catch(next);
+// });
+////delete
 
 
 app.use(cors())

@@ -22,12 +22,13 @@ export function uploadImage(event){
             type: "imageUploadComplete",
             value: urls
           })
-        }else{
-          dispatch({
-            type: "imageUploadError",
-            value: error.message
-          })
         }
+        // else {
+        //   dispatch({
+        //     type: "imageUploadError",
+        //     value: error.message
+        //   })
+        // }
 
       });
   }
