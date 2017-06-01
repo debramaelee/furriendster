@@ -71,7 +71,7 @@ class AppLayout extends React.Component {
 
     // let id = this.props.owner_info.id;
     return (
-      <div>
+      <div className="navbar">
         <ul className="nav">
           <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
           {!loggedIn ?

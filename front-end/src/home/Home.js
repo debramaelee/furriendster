@@ -15,9 +15,12 @@ class Home extends React.Component {
 
 
     return (
-      <div>
-        <h1>Welcome to Furriendster!</h1>
-        <img src="http://1.bp.blogspot.com/-j-OJZBTTth8/UH2fW7eDF6I/AAAAAAAACNQ/0kXu66TZ-qg/s1600/08-Find+a+Good+Friend.jpg" width="400px"/>
+      <div className="homepage">
+        <div className="banner">
+          <h1>Furriendster</h1>
+          <h2>Find your friend today</h2>
+        </div>
+
 
 
       </div>
