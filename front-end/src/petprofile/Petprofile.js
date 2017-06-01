@@ -38,7 +38,7 @@ class Petprofile extends React.Component {
   render() {
 // console.log(loginSession.owner_id)
     return (
-      <div className="form">
+      <div className="petprofileform">
         <form name="petform" onSubmit={event=>this.submit(event)}>
           <input type="text" key = "text" name="name" value = {this.props.name} placeholder="Name" onChange={event=> this.props.name9(event.target.value)}/><br/>
 
@@ -85,7 +85,7 @@ class Petprofile extends React.Component {
 
           <button onSubmit={event=>this.submit(event)}>Submit!</button>
         </form>
-        <button onClick={event=>this.props.uploadImage(event.target.value)}>
+        <button className="buttonpetprofile" onClick={event=>this.props.uploadImage(event.target.value)}>
         <h1> add image</h1>
         </button><br/>
       </div>
