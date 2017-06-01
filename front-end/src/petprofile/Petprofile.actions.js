@@ -101,3 +101,10 @@ export function activity9(text){
     data: text
   }
 }
+
+export function description9(text){
+  return{
+    type: "description",
+    data: text
+  }
+}

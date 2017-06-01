@@ -28,6 +28,7 @@ let petPersonality;
 let petActivities;
 let petImage;
 let imgLength;
+let petDescription;
 
 // if(!pet_info) {
 //   return <h1>Loading...</h1>;
@@ -39,6 +40,7 @@ if (this.props.pet_info){
   petSize = this.props.pet_info.size;
   petPersonality = this.props.pet_info.personality;
   petActivities = this.props.pet_info.activities;
+  petDescription = this.props.pet_info.description;
   petImage = (this.props.pet_info.image_url).replace(/[{}]/g, "");
 
   if(this.props.pet_info.fixed){
@@ -61,6 +63,7 @@ console.log(petImage);
         <h4>Age: {petAge}</h4>
         <h4>Size: {petSize}</h4>
         <p>I am {petPersonality} and I love to {petActivities}.</p>
+        <p>description {petDescription}</p>
 
 
         <img src={petImage} width="200px"/>

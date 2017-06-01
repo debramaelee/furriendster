@@ -24,7 +24,8 @@ class Petprofile extends React.Component {
         size: this.props.size,
         personality: this.props.personality,
         activities: this.props.activities,
-        image_url: this.props.img
+        image_url: this.props.img,
+        description: this.props.description
 
       }
 
@@ -37,7 +38,7 @@ class Petprofile extends React.Component {
   render() {
 // console.log(loginSession.owner_id)
     return (
-      <div>
+      <div className="form">
         <form name="petform" onSubmit={event=>this.submit(event)}>
           <input type="text" key = "text" name="name" value = {this.props.name} placeholder="Name" onChange={event=> this.props.name9(event.target.value)}/><br/>
 
@@ -77,6 +78,10 @@ class Petprofile extends React.Component {
             <option value="run" >Running and Chasing</option>
             <option value="tug" >Tug of War</option>
           </select><br/>
+          <h3> Description </h3>
+
+            <textarea cols="50" rows="5" value={this.props.description} onChange={event=>this.props.description9(event.target.value)}/>
+
 
           <button onSubmit={event=>this.submit(event)}>Submit!</button>
         </form>

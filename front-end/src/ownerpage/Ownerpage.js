@@ -58,13 +58,6 @@ if (this.props.owner_info){
         </li>
 
       )}
-      <h3>Message Board</h3>
-      <form>
-        <textarea cols="50" rows="5"/>
-        <button>Submit</button>
-      </form>
-
-
       </div>
     );
   }

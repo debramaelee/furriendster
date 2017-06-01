@@ -237,8 +237,8 @@ app.post('/api/petprofile', (req, resp, next)=>{
   let ownerId = req.loginSession.owner_id;
   db.one(`
     insert into pet_info values
-    (default, $1, $2, $3, $4, $5, $6, $7, $8, $9)
-    returning * `, [ownerId, data.name, data.gender, data.fixed, data.age, data.size, data.personality, data.activities, data.image_url])
+    (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    returning * `, [ownerId, data.name, data.gender, data.fixed, data.age, data.size, data.personality, data.activities, data.image_url, data.description])
     .then(data =>resp.json(data))
     .catch(next);
 });

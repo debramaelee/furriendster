@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+li {
+  list-style: none;
+}
+
 ul.nav {
   list-style: none;
   padding: 0;

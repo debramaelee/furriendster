@@ -8,6 +8,10 @@ const INITIAL_STATE = {
   personality: 'energetic',
   activities: 'fetch',
   image_url: '',
+  description: '',
+
+
+
 
 };
 
@@ -70,6 +74,12 @@ if (action.type === 'size'){
   return Object.assign({}, state, {
     size: action.data,
   });
+}
+
+if (action.type === 'description'){
+  return Object.assign({}, state, {
+    description: action.data,
+  })
 }
 
 if (action.type === 'imageUploadComplete'){
