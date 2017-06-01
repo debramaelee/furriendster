@@ -2,6 +2,8 @@
     background: url(/dog-friends.jpg);
     background-size: cover;
     height: 700px;
+    margin-top: -60px;
+    margin-right: -60px;
 }
 
 .homepage .banner h1 {
@@ -21,44 +23,685 @@
   font-size: 2em;
   text-shadow: 0 0 10px black;
   opacity: 0.8;
-  margin-top: -50px;
+  margin-top: -10px;
 }
 
-
-
-body {
-  margin: 0;
-  /*padding: 50px;*/
-  font-family: sans-serif;
-}
-
-li {
-  list-style: none;
-}
-
-ul.nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/*ul.nav li {
-  list-style: none;
-  padding: 0 10px 0 0;
-  float: left;
+/*.Znavbar h4 {
+  font-size: 1.4em;
+  padding-top: 20px;
 }*/
 
-ul.nav:before,
-ul.nav:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+
+
+nav {
+  height: 1px;
 }
 
-ul.nav:after {
-    clear: both;
+body
+{
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+
+  /* make it look decent enough */
+  background: #C2E0F2;
+  color: #cdcdcd;
+  font-family: "Avenir Next", "Avenir", sans-serif;
 }
 
-.active {
+a
+{
+  text-decoration: none;
+  color: #232323;
+
+  transition: color 0.3s ease;
+}
+
+a:hover
+{
+  color: tomato;
+}
+
+/*side bar menu*/
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 50px;
+  opacity: .6;
+  z-index: 1;
+
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+
+  cursor: pointer;
+
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #cdcdcd;
+  border-radius: 3px;
+
+  z-index: 1;
+
+  transform-origin: 4px 0px;
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/*
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  opacity: 1;
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+  position: absolute;
+  width: 150px;
+  height: 700px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+
+  background: #ededed;
+  opacity: 0.6;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+/*
+ * And let's fade it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+  transform: scale(1.0, 1.0);
+  opacity: 1;
+}
+
+.map {
+  height: 400px;
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  width: 600px;
+
+}
+
+.mappage{
+  background: #C2E0F2;
+}
+
+/*.chatbox{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  width: 500px;
+  background-color: white;
+  border-radius: 5px;
+
+}*/
+
+/*
+
+*/
+.commentList h3{
+  padding-top: 30px;
+  padding-left: 30px;
+}
+
+.commentNodes {
+  padding-left: 30px;
+  padding-right: 1px;
+  padding-top: 1px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+.commentAuthor {
+  padding-right: 1px;
+  padding-top: 10px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.commentBox {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  width: 400px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.neighbors h2 {
+  position: absolute;
+  top: 25px;
+  padding-left: 30px;
+  color: black;
+}
+
+.chatbox #typetext {
+  width: 350px;
+  height: 30px;
+}
+
+.commentForm {
+  padding-top: 25px;
+  padding-left: 25px;
+  padding-bottom: 25px;
+}
+
+.submitbutton {
+  margin-top: 20px;
+}
+``
+/*LOGIN PAGE FORM*/
+.loginpage {
+  /*box-sizing: border-box;*/
+	font-size: 1em;
+	margin: 0;
+	padding: 0;
+}
+
+.loginpage {
+	background: url(/water-dogs.jpg) center no-repeat;
+	background-size: cover;
+	color: #333;
+	font-size: 18px;
+  font-family: 'Glyphicons Halflings';
+}
+.loginpage .container{
+	border-radius: 0.5em;
+	box-shadow: 0 0 1em 0 rgba(51,51,51,0.25);
+	display: block;
+	max-width: 480px;
+	overflow: visible;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	padding: 2em;
+	position: absolute;
+		top: 50%;
+		left: 50%;
+		/*z-index: 1;*/
+	width: 98%;
+}
+.loginpage .container:before{
+	background: url(/water-dogs.jpg) center no-repeat;
+	background-size: cover;
+	content: '';
+	-webkit-filter: blur(10px);
+	filter: blur(10px);
+	height: 100vh;
+	position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: -1;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 100vw;
+}
+.loginpage .container:after{
+	background: rgba(255,255,255,0.6);
+	content: '';
+	display: block;
+	height: 100%;
+	position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	width: 100%;
+}
+.loginpage form button.submit{
+	background: rgba(255,255,255,0.25);
+	border: 1px solid #333;
+	line-height: 1em;
+	padding: 0.5em 0.5em;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.loginpage form button:hover,
+.loginpage form button:focus,
+.loginpage form button:active,
+.loginpage form button.loading{
+	background: #333;
+	color: #fff;
+	outline: none;
+}
+.loginpage form button.success{
+	background: #27ae60;
+	border-color: #27ae60;
+	color: #fff;
+}
+@-webkit-keyframes spin{
+	from{ transform: rotate(0deg); }
+	to{ transform: rotate(360deg); }
+}
+@keyframes spin{
+	from{ transform: rotate(0deg); }
+	to{ transform: rotate(360deg); }
+}
+.loginpage form button span.loading-spinner{
+	-webkit-animation: spin 0.5s linear infinite;
+	animation: spin 0.5s linear infinite;
+	border: 2px solid #fff;
+	border-top-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+}
+
+.loginpage form label{
+	border-bottom: 1px solid #333;
+	display: block;
+	font-size: 1.25em;
+	margin-bottom: 0.5em;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.loginpage form label.col-one-half{
+	float: left;
+	width: 50%;
+}
+.loginpage form label.col-one-half:nth-of-type(even){
+	border-left: 1px solid #333;
+	padding-left: 0.25em;
+}
+.loginpage form label input{
+	background: none;
+	border: none;
+	line-height: 1em;
+	font-weight: 300;
+	padding: 0.125em 0.25em;
+	width: 100%;
+}
+.loginpage form label input:focus{
+	outline: none;
+}
+.loginpage form label input:-webkit-autofill{
+	background-color: transparent !important;
+}
+.loginpage form label span.label-text{
+	display: block;
+	font-size: 0.5em;
+	font-weight: bold;
+	padding-left: 0.5em;
+	text-transform: uppercase;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.loginpage form label.checkbox{
+	border-bottom: 0;
+	text-align: center;
+}
+.loginpage form label.checkbox input{
+	display: none;
+}
+.loginpage form label.checkbox span{
+	font-size: 0.5em;
+}
+.loginpage form label.checkbox span:before{
+	content: '\e157';
+	display: inline-block;
+  font-family: 'Indie Flower', cursive;
+	font-size: 1.125em;
+	padding-right: 0.25em;
+	position: relative;
+		top: 1px;
+}
+.loginpage form label.checkbox input:checked + span:before
+{
+  content: '\e067';
+}
+.loginpage form label.invalid{border-color: #c0392b !important;}
+.loginpage form label.invalid span.label-text{color: #c0392b;}
+.loginpage form label.password{position: relative;}
+.loginpage form label.password button.toggle-visibility{
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 0.75em;
+	line-height: 1em;
+	position: absolute;
+		top: 50%;
+		right: 0.5em;
+	text-align: center;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.loginpage form label.password button.toggle-visibility:hover,
+.loginpage form label.password button.toggle-visibility:focus,
+.loginpage form label.password button.toggle-visibility:active{
+	color: #000;
+	outline: none;
+}
+.loginpage form label.password button.toggle-visibility span{vertical-align: middle;}
+
+.loginpage h1{
+	font-size: 3em;
+	margin: 0 0 0.5em 0;
+	text-align: center;
+  font-family: 'Indie Flower', cursive;
+  color: black;
+  opacity: .5;
+}
+.loginpage h1 img{
+	height: auto;
+	margin: 0 auto;
+	max-width: 240px;
+	width: 100%;
+}
+.loginpage html{
+	font-size: 18px;
+	height: 100%;
+}
+
+.loginpage .text-center{
+	text-align: center;
+}
+
+/*SIGNUP PAGE FORM*/
+.signuppage {
+  /*box-sizing: border-box;*/
+	font-size: 1em;
+	margin: 0;
+	padding: 0;
+}
+
+.signuppage {
+	background: url(/water-dogs.jpg) center no-repeat;
+	background-size: cover;
+	color: #333;
+	font-size: 18px;
+  font-family: 'Glyphicons Halflings';
+}
+.signuppage .container{
+	border-radius: 0.5em;
+	box-shadow: 0 0 1em 0 rgba(51,51,51,0.25);
+	display: block;
+	max-width: 480px;
+	overflow: visible;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	padding: 2em;
+	position: absolute;
+		top: 50%;
+		left: 50%;
+		/*z-index: 1;*/
+	width: 98%;
+}
+.signuppage .container:before{
+	background: url(/water-dogs.jpg) center no-repeat;
+	background-size: cover;
+	content: '';
+	-webkit-filter: blur(10px);
+	filter: blur(10px);
+	height: 100vh;
+	position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: -1;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 100vw;
+}
+.signuppage .container:after{
+	background: rgba(255,255,255,0.6);
+	content: '';
+	display: block;
+	height: 100%;
+	position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	width: 100%;
+}
+.signuppage form button.submit{
+	background: rgba(255,255,255,0.25);
+	border: 1px solid #333;
+	line-height: 1em;
+	padding: 0.5em 0.5em;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.signuppage form button:hover,
+.signuppage form button:focus,
+.signuppage form button:active,
+.signuppage form button.loading{
+	background: #333;
+	color: #fff;
+	outline: none;
+}
+.signuppage form button.success{
+	background: #27ae60;
+	border-color: #27ae60;
+	color: #fff;
+}
+@-webkit-keyframes spin{
+	from{ transform: rotate(0deg); }
+	to{ transform: rotate(360deg); }
+}
+@keyframes spin{
+	from{ transform: rotate(0deg); }
+	to{ transform: rotate(360deg); }
+}
+.signuppage form button span.loading-spinner{
+	-webkit-animation: spin 0.5s linear infinite;
+	animation: spin 0.5s linear infinite;
+	border: 2px solid #fff;
+	border-top-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+}
+
+.signuppage form label{
+	border-bottom: 1px solid #333;
+	display: block;
+	font-size: 1.25em;
+	margin-bottom: 0.5em;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.signuppage form label.col-one-half{
+	float: left;
+	width: 49%;
+}
+.signuppage form label.col-one-half:nth-of-type(even){
+	border-left: 1px solid #333;
+	padding-left: 0.25em;
+  float: right;
+}
+.signuppage form label input{
+	background: none;
+	border: none;
+	line-height: 1em;
+	font-weight: 300;
+	padding: 0.125em 0.25em;
+	width: 100%;
+}
+.signuppage form label input:focus{
+	outline: none;
+}
+.signuppage form label input:-webkit-autofill{
+	background-color: transparent !important;
+}
+.signuppage form label span.label-text{
+	display: block;
+	font-size: 0.5em;
+	font-weight: bold;
+	padding-left: 0.5em;
+	text-transform: uppercase;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.signuppage form label.checkbox{
+	border-bottom: 0;
+	text-align: center;
+}
+.signuppage form label.checkbox input{
+	display: none;
+}
+.signuppage form label.checkbox span{
+	font-size: 0.5em;
+}
+.signuppage form label.checkbox span:before{
+	content: '\e157';
+	display: inline-block;
+  font-family: 'Indie Flower', cursive;
+	font-size: 1.125em;
+	padding-right: 0.25em;
+	position: relative;
+		top: 1px;
+}
+.signuppage form label.checkbox input:checked + span:before
+{
+  content: '\e067';
+}
+.signuppage form label.invalid{border-color: #c0392b !important;}
+.signuppage form label.invalid span.label-text{color: #c0392b;}
+.signuppage form label.password{position: relative;}
+.signuppage form label.password button.toggle-visibility{
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 0.75em;
+	line-height: 1em;
+	position: absolute;
+		top: 50%;
+		right: 0.5em;
+	text-align: center;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.signuppage form label.password button.toggle-visibility:hover,
+.signuppage form label.password button.toggle-visibility:focus,
+.signuppage form label.password button.toggle-visibility:active{
+	color: #000;
+	outline: none;
+}
+.signuppage form label.password button.toggle-visibility span{vertical-align: middle;}
+
+.signuppage h1{
+	font-size: 3em;
+	margin: 0 0 0.5em 0;
+	text-align: center;
+  font-family: 'Indie Flower', cursive;
+  color: black;
+  opacity: .5;
+}
+.signuppage h1 img{
+	height: auto;
+	margin: 0 auto;
+	max-width: 240px;
+	width: 100%;
+}
+.signuppage html{
+	font-size: 18px;
+	height: 100%;
+}
+
+.signuppage .text-center{
+	text-align: center;
+}
+
+.signuppage .submit {
+  margin: auto;
+  display: block;
+}
+
+body {
+  overflow: hidden;
+}
+/*.active {
   color: red;
 }
 
@@ -66,7 +709,4 @@ ul.nav:after {
   padding: 20px 0;
 }
 
-.map {
-  height: 400px;
-  width: 100%;
-}
+*/

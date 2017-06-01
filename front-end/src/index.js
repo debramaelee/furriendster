@@ -71,8 +71,14 @@ class AppLayout extends React.Component {
 
     // let id = this.props.owner_info.id;
     return (
-      <div className="navbar">
-        <ul className="nav">
+      <div className="Znavbar">
+      <nav role="navigation">
+      <div id="menuToggle">
+       <input type="checkbox" />
+      <span></span>
+      <span></span>
+      <span></span>
+        <ul id="menu">
           <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
           {!loggedIn ?
             [<li key ="signup"><Link to="/user/signup" activeClassName="active">Sign Up</Link></li>,
@@ -86,12 +92,13 @@ class AppLayout extends React.Component {
           ]
           }
         </ul>
+        </div>
+        </nav>
         {this.props.children}
       </div>
     )
   }
 }
-
 const AppLayoutContainer = ReactRedux.connect(
   state => ({
     loginInfo: state.login.loginInfo

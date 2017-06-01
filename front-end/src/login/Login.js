@@ -36,14 +36,23 @@ class Login extends React.Component {
   }
 
   render() {
-  
+
     return (
-      <div>
-        <form onSubmit = {event=> this.submit(event)}>
-          <input type="text" name="email" placeholder="Email" value = {this.state.email} onChange={event=> this.change(event, 'email')}/><br/>
-          <input type="password" name="password" placeholder="Password" value = {this.state.password} onChange={event=> this.change(event, 'password')}/><br/>
-          <button>Login</button>
-        </form>
+      <div className="loginpage">
+        <div className="container">
+        <h1 className="text-center">Login</h1>
+          <form className="registration-form" onSubmit = {event=> this.submit(event)}>
+          <label>
+            <input type="text" name="email" placeholder="Email" value = {this.state.email} onChange={event=> this.change(event, 'email')}/>
+          </label>
+          <label className="password">
+            <input type="password" name="password" placeholder="Password" value = {this.state.password} onChange={event=> this.change(event, 'password')}/>
+          </label>
+          <div className="text-center">
+            <button className="submit" name="login">Login</button>
+          </div>
+          </form>
+        </div>
       </div>
     );
   }

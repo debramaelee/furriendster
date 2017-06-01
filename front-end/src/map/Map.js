@@ -274,7 +274,7 @@ class Map extends React.Component {
 
     console.log('HERE', allAddresses[0] && allAddresses[0].zip);
     return (
-      <div>
+      <div className="mappage">
 
         <div className="map" ref={elm => this.mapElm = elm}>
         </div>

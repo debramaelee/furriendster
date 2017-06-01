@@ -6,9 +6,11 @@ const io = require('socket.io-client');
 class App extends React.Component {
     render() {
         return (
+          <div className ="chatbox">
             <div>
-            <CommentBox id={this.props.id} name= {this.props.name}/>
-        </div>
+              <CommentBox id={this.props.id} name= {this.props.name}/>
+            </div>
+          </div>
         );
     }
 }
@@ -62,10 +64,12 @@ class CommentBox extends React.Component {
 
     render() {
         return (
+          <div className ="chatbox">
             <div className="commentBox">
-            <CommentList data={this.state.data} name={this.props.name} id={this.props.id}/>
-            <CommentForm  onCommentSubmit={this.handleCommentSubmit.bind(this)} />
-        </div>
+              <CommentList data={this.state.data} name={this.props.name} id={this.props.id}/>
+              <CommentForm  onCommentSubmit={this.handleCommentSubmit.bind(this)} />
+            </div>
+          </div>
         );
     }
 }
@@ -80,10 +84,15 @@ class CommentList extends React.Component {
             );
         });
         return (
+          <div className="neighbors">
+          <h2>Chat with your Neighbors</h2>
             <div className="commentList">
-              <h3>Chat with your Neighbors</h3>
-        {commentNodes}
-      </div>
+
+              <div className="commentNodes">
+                {commentNodes}
+              </div>
+            </div>
+        </div>
         );
     }
 }
@@ -94,7 +103,7 @@ class Comment extends React.Component {
     let ownerId = this.props.id;
 
     return (
-      <div>
+      <div className ="chatbox">
         <h4 className="commentAuthor" >
           <a href={`/#/ownerpage/${ownerId}`}>{ownerName}</a> says:
         </h4>
@@ -132,16 +141,17 @@ class CommentForm extends React.Component {
     render() {
       console.log(this.props.login)
         return (
+          <div className ="chatbox">
             <form className="commentForm" onSubmit={this.handleSubmit.bind(this)}>
-
-        <input
-          type="text"
-          placeholder="Say something..."
-          value={this.state.text}
-          onChange={this.handleTextChange.bind(this)}
-        />
-        <input type="submit" value="Post" />
-      </form>
+              <input id="typetext"
+                type="text"
+                placeholder="Say something..."
+                value={this.state.text}
+                onChange={this.handleTextChange.bind(this)}
+              />
+              <input className="submitbutton" type="submit" value="Post" />
+            </form>
+          </div>
         );
     }
 
