@@ -2,7 +2,7 @@ const INITIAL_STATE = {
   // put properties you need here
   name: '',
   gender: '',
-  fixed: 'FALSE',
+  fixed: false,
   age: 'puppy',
   size: 'small',
   personality: 'energetic',

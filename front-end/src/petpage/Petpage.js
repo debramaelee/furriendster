@@ -58,15 +58,16 @@ console.log(petImage);
     return (
       <div className="pet-bio">
 
-        <h4>Name: {petName}</h4>
-        <h4>Gender: {petGender} ({petFixed})</h4>
-        <h4>Age: {petAge}</h4>
-        <h4>Size: {petSize}</h4>
-        <p>I am {petPersonality} and I love to {petActivities}.</p>
-        <p>description {petDescription}</p>
+        <h2>{petName}</h2>
+        <img src={petImage} width="400px"/>
+        <div className="petdesc">
+          <h3>Gender: {petGender} ({petFixed})</h3>
+          <h3>Age: {petAge}</h3>
+          <h3>Size: {petSize}</h3>
+          <p>I am {petPersonality} and I love to {petActivities}.</p>
+          <p>description {petDescription}</p>
+        </div>
 
-
-        <img src={petImage} width="200px"/>
 
       </div>
     );

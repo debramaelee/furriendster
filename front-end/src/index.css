@@ -8,8 +8,8 @@
 
 .homepage .banner h1 {
   color: white;
-  font-family: 'Philosopher', sans-serif;
-  font-size: 7em;
+  font-family: 'Arvo', serif;
+  font-size: 6.5em;
   text-align: center;
   padding-top: 400px;
   text-shadow: 0 0 10px black;
@@ -23,7 +23,7 @@
   font-size: 3em;
   text-shadow: 0 0 10px black;
   opacity: 0.8;
-  margin-top: -30px;
+  margin-top: -50px;
 }
 
 /*.Znavbar h4 {
@@ -198,12 +198,12 @@ a:hover
 }
 
 .map {
-  height: 400px;
+  height: 500px;
   position: fixed;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
-  width: 600px;
+  width: 800px;
 
 }
 
@@ -273,7 +273,42 @@ a:hover
 .submitbutton {
   margin-top: 20px;
 }
-``
+
+/*OWNER PAGE and pet page*/
+.owner-bio, .pet-bio {
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  list-style-type: none;
+  background-color: white;
+  border-radius: 5px;
+}
+.owner-bio img {
+  padding-left: 50px;
+  margin-bottom: 50px;
+}
+.owner-bio h2 {
+  color: black;
+  padding-left: 50px;
+  padding-top: 40px;
+}
+
+.pet-bio img {
+  padding-left: 50px;
+}
+.pet-bio h2 {
+  color: black;
+  padding-left: 50px;
+  padding-top: 40px;
+}
+
+.petdesc {
+  padding-left: 50px;
+  padding-right: 50px;
+  color: black;
+  padding-bottom: 50px;
+}
+
 /*LOGIN PAGE FORM*/
 
 .loginpage {
@@ -281,6 +316,9 @@ a:hover
 	font-size: 1em;
 	margin: 0;
 	padding: 0;
+}
+.loginpage h2 {
+
 }
 
 .loginpage {
@@ -876,6 +914,226 @@ a:hover
   margin: auto;
   display: block;
 }
+
+/*PETPROFILE PAGE*/
+
+
+.petprofileform .container{
+
+	border-radius: 0.5em;
+	box-shadow: 0 0 1em 0 rgba(51,51,51,0.25);
+	display: block;
+	max-width: 480px;
+	overflow: visible;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	padding: 2em;
+	position: absolute;
+		top: 50%;
+		left: 50%;
+		/*z-index: 1;*/
+	width: 98%;
+}
+.petprofileform .container:before{
+	background: url(/best-friends.jpg) center no-repeat;
+	background-size: cover;
+	content: '';
+	-webkit-filter: blur(10px);
+	filter: blur(10px);
+	height: 100vh;
+	position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: -1;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 100vw;
+}
+.petprofileform .container:after{
+	background: rgba(255,255,255,0.6);
+	content: '';
+	display: block;
+	height: 100%;
+	position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	width: 100%;
+}
+.petprofileform form button.submit{
+	background: rgba(255,255,255,0.25);
+	border: 1px solid #333;
+	line-height: 1em;
+	padding: .5em .5em;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+  font-size: 1.25em;
+}
+.petprofileform form button:hover,
+.petprofileform form button:focus,
+.petprofileform form button:active,
+.petprofileform form button.loading{
+	background: #333;
+	color: #fff;
+	outline: none;
+}
+.petprofileform form button.success{
+	background: #27ae60;
+	border-color: #27ae60;
+	color: #fff;
+  font-size: .9em;
+}
+
+
+@-webkit-keyframes spin{
+	from{ transform: rotate(0deg); }
+	to{ transform: rotate(360deg); }
+}
+@keyframes spin{
+	from{ transform: rotate(0deg); }
+	to{ transform: rotate(360deg); }
+}
+
+.petprofileform form.petform{
+  color: #676869;
+  font-family: "Avenir Next", "Avenir", sans-serif;
+}
+
+.petprofileform .petform input.name{
+  border-bottom: 2px solid #333;
+}
+
+
+/*underline inputs */
+.petprofileform form label{
+	/*border-bottom: 1px solid #333;*/
+	display: block;
+	font-size: 1.45em;
+	margin-bottom: 0.5em;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+  color: #676869;
+  padding-top: -10px;
+}
+
+
+.petprofileform form label.col-one-half{
+	float: left;
+	width: 49%;
+}
+.petprofileform form label.col-one-half:nth-of-type(even){
+	border-left: 1px solid #333;
+	padding-left: 0.25em;
+  float: right;
+}
+.petprofileform form label input{
+  font-size: .9em;
+	background: none;
+	border: none;
+	line-height: 1em;
+	font-weight: 300;
+	padding: 0.125em 0.25em;
+	width: 100%;
+
+}
+.petprofileform form label input:focus{
+	outline: none;
+}
+.petprofileform form label input:-webkit-autofill{
+	background-color: transparent !important;
+}
+.petprofileform form label span.label-text{
+	display: block;
+	font-size: 0.5em;
+	font-weight: bold;
+	padding-left: 0.5em;
+	text-transform: uppercase;
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+
+}
+/*.spetprofileform label.checkbox{
+	border-bottom: 0;
+	text-align: center;
+}
+.petprofileform form label.checkbox input{
+	display: none;
+}
+.petprofileform form label.checkbox span{
+	font-size: 0.5em;
+}
+.petprofileform form label.checkbox span:before{
+	content: '\e157';
+	display: inline-block;
+  font-family: 'Indie Flower', cursive;
+	font-size: 1.125em;
+	padding-right: 0.25em;
+	position: relative;
+		top: 1px;
+}
+.petprofileform form label.checkbox input:checked + span:before
+{
+  content: '\e067';
+}*/
+.petprofileform form label.invalid{border-color: #c0392b !important;}
+.petprofileform form label.invalid span.label-text{color: #c0392b;}
+/*.petprofileform form label.password{position: relative;}
+.petprofileform form label.password button.toggle-visibility{
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 0.75em;
+	line-height: 1em;
+	position: absolute;
+		top: 50%;
+		right: 0.5em;
+	text-align: center;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-transition: all 0.25s;
+	transition: all 0.25s;
+}
+.petprofileform form label.password button.toggle-visibility:hover,
+.petprofileform form label.password button.toggle-visibility:focus,
+.petprofileform form label.password button.toggle-visibility:active{
+	color: #000;
+	outline: none;
+}c
+.petprofileform form label.password button.toggle-visibility span{vertical-align: middle;}*/
+
+.petprofileform h1{
+	font-size: 3em;
+	margin: 0 0 0.5em 0;
+	text-align: center;
+  font-family: 'Indie Flower', cursive;
+  color: black;
+  opacity: .5;
+}
+.petprofileform h1 img{
+	height: auto;
+	margin: 0 auto;
+	max-width: 240px;
+	width: 100%;
+}
+.petprofileform html{
+	font-size: 18px;
+	height: 100%;
+}
+
+.petprofileform .text-center{
+	text-align: center;
+
+}
+
+.petprofileform .submit {
+  margin: auto;
+  display: block;
+}
+
+
 
 body{
   overflow: hidden;

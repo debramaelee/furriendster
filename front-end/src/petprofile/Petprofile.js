@@ -39,14 +39,19 @@ class Petprofile extends React.Component {
 // console.log(loginSession.owner_id)
     return (
       <div className="petprofileform">
-        <form name="petform" onSubmit={event=>this.submit(event)}>
-          <input type="text" key = "text" name="name" value = {this.props.name} placeholder="Name" onChange={event=> this.props.name9(event.target.value)}/><br/>
+        <div className="container">
+        <h1 className="text-center">Create Pet Profile</h1>
+        <form className="petform" onSubmit={event=>this.submit(event)}>
+          <label className="col-one-half">
+          <span className="label-text"></span>
+          <input className="name" type="text" key = "text" name="name" value = {this.props.name} placeholder="Name" onChange={event=> this.props.name9(event.target.value)}/>
+          </label>
 
-          <input type="radio" name="gender" value="male" onChange={event=>this.props.gender9(event.target.value)}/>Male
+          <input className="radio" type="radio" name="gender" value="male" onChange={event=>this.props.gender9(event.target.value)}/>Male
 
-          <input type="radio" name="gender" value="female" onChange={event=>this.props.gender9(event.target.value)}/>Female<br/>
+          <input className="radio" type="radio" name="gender" value="female" onChange={event=>this.props.gender9(event.target.value)}/>Female<br/>
 
-          <input type="checkbox" name="fixed" value = {this.props.fixed}  onChange={event=>this.props.fixed9(event.target.value)}/>Fixed?<br/>
+          <input className="radio" type="checkbox" name="fixed" value = {this.props.fixed}  onChange={event=>this.props.fixed9(event.target.value)}/>Fixed?<br/>
 
           <label>Age</label><br/>
           <select name="age" value = {this.props.age}  onChange={event=>this.props.age9(event.target.value)}>
@@ -78,17 +83,18 @@ class Petprofile extends React.Component {
             <option value="run" >Running and Chasing</option>
             <option value="tug" >Tug of War</option>
           </select><br/>
-          <h3> Description </h3>
+          <label> Description</label>
 
-            <textarea cols="50" rows="5" value={this.props.description} onChange={event=>this.props.description9(event.target.value)}/>
+            <textarea cols="50" rows="5" value={this.props.description}  onChange={event=>this.props.description9(event.target.value)}/>
 
 
-          <button onSubmit={event=>this.submit(event)}>Submit!</button>
+          <button className="submit" onSubmit={event=>this.submit(event)}>Submit!</button>
         </form>
-        <button className="buttonpetprofile" onClick={event=>this.props.uploadImage(event.target.value)}>
+        <button className="image" onClick={event=>this.props.uploadImage(event.target.value)}>
         <h1> add image</h1>
         </button><br/>
       </div>
+    </div>
     );
   }
 }

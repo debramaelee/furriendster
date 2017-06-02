@@ -46,13 +46,13 @@ if (this.props.owner_info){
     return (
       <div className="owner-bio">
 
-        <h4>Meet {ownerName}s Pets</h4>
+        <h2>Meet {ownerName}s Pets</h2>
         {this.props.pet_info.map((petInfo, idx)=>
         <li key={idx}>
 
             {petInfo.image_url ?
               <a href={`/#/petpage/${petInfo.id}`} target="_blank">
-              <img src={petInfo.image_url.replace(/[{}]/g, "")} width="200px" /></a> : <p>Image not found!</p>
+              <img src={petInfo.image_url.replace(/[{}]/g, "")} width="400px" /></a> : <p>Image not found!</p>
             }
 
         </li>
