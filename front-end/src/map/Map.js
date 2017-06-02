@@ -62,7 +62,6 @@ class Map extends React.Component {
   }
 
   fetchLocations(addresses) {
-    console.log('hello!');
     let geocoder = new google.maps.Geocoder();
     // let addressid = [];
     // // let allAddresses = this.props.addresses
@@ -92,7 +91,6 @@ class Map extends React.Component {
 
     bluebird.mapSeries(addresses, geocode)
       .then(resultss => {
-        console.log('addresses', addresses);
         // var geocoder = new google.maps.Geocoder();
         let arr=[]
         for (let i = 0; i < addresses.length; i++){
@@ -100,7 +98,6 @@ class Map extends React.Component {
           let id = addresses[i].id;
           let name = addresses[i].name;
           if (resultss[i] == null) {
-            console.log('here ' , i, resultss)
           }
           let latitude = resultss[i][0].geometry.location.lat();
           let longitude = resultss[i][0].geometry.location.lng();
@@ -124,7 +121,6 @@ class Map extends React.Component {
 
           ownerMarker.addListener('click', function() {
             infowindow.open(this.map, ownerMarker);
-            console.log('You clicked!'+  longitude + ' ' + latitude + ' ' + id)
 
           });
 
@@ -197,11 +193,9 @@ class Map extends React.Component {
 
     });
 
-    console.log('component mounting')
 
     this.infoWindow = new google.maps.InfoWindow();
 
-    console.log('Map did mount');
   }
 
   center(address, callback) {
@@ -213,7 +207,6 @@ class Map extends React.Component {
         console.log('Got info');
         var latitude = results[0].geometry.location.lat();
         var longitude = results[0].geometry.location.lng();
-        console.log(latitude, longitude);
          coord = {
           lat: latitude,
           lng: longitude
@@ -265,19 +258,32 @@ class Map extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.timeoutId);
-    console.log('Map will unmount');
   }
 
   render() {
 
     let allAddresses = this.props.addresses
 
-    console.log('HERE', allAddresses[0] && allAddresses[0].zip);
     return (
       <div className="mappage">
-
+        <h1>Local Map</h1>
         <div className="map" ref={elm => this.mapElm = elm}>
+
         </div>
+        <div className="iconbox">
+        <h2>Icon Key</h2>
+        <div className="iconkey">
+          <div>
+            <img src="/owner.png" width="50px"/>
+            <label>Dog Parks</label>
+          </div>
+          <div>
+            <img src="http://www.clker.com/cliparts/N/X/V/T/T/U/teal-paw-print-hi.png" width="50px"/>
+            <label>Nearby Furriends</label>
+          </div>
+          </div>
+        </div>
+
       </div>
     );
   }

@@ -211,19 +211,35 @@ a:hover
   background: #C2E0F2;
 }
 
-/*.chatbox{
+.iconkey {
+  text-align: center;
+  /*float: left;*/
+}
+.mappage h1, h2, label {
+  color: black;
+}
+.mappage img {
+  padding-right: 20px;
+
+}
+.mappage h1 {
+  margin-bottom: -75px;
+  float: bottom;
+}
+
+.mappage h1, h2 {
+  text-align: center;
+
+}
+
+.iconbox {
+  background: white;
+  border-radius: 5px;
+  width: 800px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px;
-  width: 500px;
-  background-color: white;
-  border-radius: 5px;
-
-}*/
-
-/*
-
-*/
+  padding-bottom: 20px;
+}
 .commentList h3{
   padding-top: 30px;
   padding-left: 30px;
@@ -697,224 +713,6 @@ a:hover
 
 }
 
-
-/*PETPROFILE PAGE*/
-
-.signuppage {
-  /*box-sizing: border-box;*/
-	font-size: 1em;
-	margin: 0;
-	padding: 0;
-}
-
-.signuppage {
-	background: url(/water-dogs.jpg) center no-repeat;
-	background-size: cover;
-	color: #333;
-	font-size: 18px;
-  font-family: 'Glyphicons Halflings';
-}
-.signuppage .container{
-	border-radius: 0.5em;
-	box-shadow: 0 0 1em 0 rgba(51,51,51,0.25);
-	display: block;
-	max-width: 480px;
-	overflow: visible;
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-	padding: 2em;
-	position: absolute;
-		top: 50%;
-		left: 50%;
-		/*z-index: 1;*/
-	width: 98%;
-}
-.signuppage .container:before{
-	background: url(/water-dogs.jpg) center no-repeat;
-	background-size: cover;
-	content: '';
-	-webkit-filter: blur(10px);
-	filter: blur(10px);
-	height: 100vh;
-	position: absolute;
-		top: 50%;
-		left: 50%;
-		z-index: -1;
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-	width: 100vw;
-}
-.signuppage .container:after{
-	background: rgba(255,255,255,0.6);
-	content: '';
-	display: block;
-	height: 100%;
-	position: absolute;
-		top: 0;
-		left: 0;
-		z-index: -1;
-	width: 100%;
-}
-.signuppage form button.submit{
-	background: rgba(255,255,255,0.25);
-	border: 1px solid #333;
-	line-height: 1em;
-	padding: 0.5em 0.5em;
-	-webkit-transition: all 0.25s;
-	transition: all 0.25s;
-}
-.signuppage form button:hover,
-.signuppage form button:focus,
-.signuppage form button:active,
-.signuppage form button.loading{
-	background: #333;
-	color: #fff;
-	outline: none;
-}
-.signuppage form button.success{
-	background: #27ae60;
-	border-color: #27ae60;
-	color: #fff;
-}
-@-webkit-keyframes spin{
-	from{ transform: rotate(0deg); }
-	to{ transform: rotate(360deg); }
-}
-@keyframes spin{
-	from{ transform: rotate(0deg); }
-	to{ transform: rotate(360deg); }
-}
-.signuppage form button span.loading-spinner{
-	-webkit-animation: spin 0.5s linear infinite;
-	animation: spin 0.5s linear infinite;
-	border: 2px solid #fff;
-	border-top-color: transparent;
-	border-radius: 50%;
-	display: inline-block;
-	height: 1em;
-	width: 1em;
-}
-
-.signuppage form label{
-	border-bottom: 1px solid #333;
-	display: block;
-	font-size: 1.25em;
-	margin-bottom: 0.5em;
-	-webkit-transition: all 0.25s;
-	transition: all 0.25s;
-}
-.signuppage form label.col-one-half{
-	float: left;
-	width: 49%;
-}
-.signuppage form label.col-one-half:nth-of-type(even){
-	border-left: 1px solid #333;
-	padding-left: 0.25em;
-  float: right;
-}
-.signuppage form label input{
-	background: none;
-	border: none;
-	line-height: 1em;
-	font-weight: 300;
-	padding: 0.125em 0.25em;
-	width: 100%;
-}
-.signuppage form label input:focus{
-	outline: none;
-}
-.signuppage form label input:-webkit-autofill{
-	background-color: transparent !important;
-}
-.signuppage form label span.label-text{
-	display: block;
-	font-size: 0.5em;
-	font-weight: bold;
-	padding-left: 0.5em;
-	text-transform: uppercase;
-	-webkit-transition: all 0.25s;
-	transition: all 0.25s;
-}
-.signuppage form label.checkbox{
-	border-bottom: 0;
-	text-align: center;
-}
-.signuppage form label.checkbox input{
-	display: none;
-}
-.signuppage form label.checkbox span{
-	font-size: 0.5em;
-}
-.signuppage form label.checkbox span:before{
-	content: '\e157';
-	display: inline-block;
-  font-family: 'Indie Flower', cursive;
-	font-size: 1.125em;
-	padding-right: 0.25em;
-	position: relative;
-		top: 1px;
-}
-.signuppage form label.checkbox input:checked + span:before
-{
-  content: '\e067';
-}
-.signuppage form label.invalid{border-color: #c0392b !important;}
-.signuppage form label.invalid span.label-text{color: #c0392b;}
-.signuppage form label.password{position: relative;}
-.signuppage form label.password button.toggle-visibility{
-	background: none;
-	border: none;
-	cursor: pointer;
-	font-size: 0.75em;
-	line-height: 1em;
-	position: absolute;
-		top: 50%;
-		right: 0.5em;
-	text-align: center;
-	-webkit-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
-	-webkit-transition: all 0.25s;
-	transition: all 0.25s;
-}
-.signuppage form label.password button.toggle-visibility:hover,
-.signuppage form label.password button.toggle-visibility:focus,
-.signuppage form label.password button.toggle-visibility:active{
-	color: #000;
-	outline: none;
-}
-.signuppage form label.password button.toggle-visibility span{vertical-align: middle;}
-
-.signuppage h1{
-	font-size: 3em;
-	margin: 0 0 0.5em 0;
-	text-align: center;
-  font-family: 'Indie Flower', cursive;
-  color: black;
-  opacity: .5;
-}
-.signuppage h1 img{
-	height: auto;
-	margin: 0 auto;
-	max-width: 240px;
-	width: 100%;
-}
-.signuppage html{
-	font-size: 18px;
-	height: 100%;
-}
-
-.signuppage .text-center{
-	text-align: center;
-}
-
-.signuppage .submit {
-  margin: auto;
-  display: block;
-}
-
 /*PETPROFILE PAGE*/
 
 
@@ -1002,14 +800,17 @@ a:hover
 .petprofileform form.petform{
   color: #676869;
   font-family: "Avenir Next", "Avenir", sans-serif;
+
 }
 
 .petprofileform .petform input.name{
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid #676869;
+  border-right: 5px;
+
 }
 
 
-/*underline inputs */
+/*underline inputs also controls center of the text */
 .petprofileform form label{
 	/*border-bottom: 1px solid #333;*/
 	display: block;
@@ -1018,8 +819,17 @@ a:hover
 	-webkit-transition: all 0.25s;
 	transition: all 0.25s;
   color: #676869;
-  padding-top: -10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+
 }
+
+.age-label {
+  float: left;
+}
+
+
 
 
 .petprofileform form label.col-one-half{
@@ -1057,55 +867,10 @@ a:hover
 	transition: all 0.25s;
 
 }
-/*.spetprofileform label.checkbox{
-	border-bottom: 0;
-	text-align: center;
-}
-.petprofileform form label.checkbox input{
-	display: none;
-}
-.petprofileform form label.checkbox span{
-	font-size: 0.5em;
-}
-.petprofileform form label.checkbox span:before{
-	content: '\e157';
-	display: inline-block;
-  font-family: 'Indie Flower', cursive;
-	font-size: 1.125em;
-	padding-right: 0.25em;
-	position: relative;
-		top: 1px;
-}
-.petprofileform form label.checkbox input:checked + span:before
-{
-  content: '\e067';
-}*/
+
 .petprofileform form label.invalid{border-color: #c0392b !important;}
 .petprofileform form label.invalid span.label-text{color: #c0392b;}
-/*.petprofileform form label.password{position: relative;}
-.petprofileform form label.password button.toggle-visibility{
-	background: none;
-	border: none;
-	cursor: pointer;
-	font-size: 0.75em;
-	line-height: 1em;
-	position: absolute;
-		top: 50%;
-		right: 0.5em;
-	text-align: center;
-	-webkit-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
-	-webkit-transition: all 0.25s;
-	transition: all 0.25s;
-}
-.petprofileform form label.password button.toggle-visibility:hover,
-.petprofileform form label.password button.toggle-visibility:focus,
-.petprofileform form label.password button.toggle-visibility:active{
-	color: #000;
-	outline: none;
-}c
-.petprofileform form label.password button.toggle-visibility span{vertical-align: middle;}*/
+
 
 .petprofileform h1{
 	font-size: 3em;
@@ -1138,6 +903,9 @@ a:hover
 
 
 
+
+
+
 /*select option */
 
 
@@ -1146,6 +914,9 @@ a:hover
    background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
    height: 34px;
    width: 240px;
+   /*margin-left: 90px;*/
+   margin-bottom: 2px;
+
 }
 
 
@@ -1154,12 +925,30 @@ a:hover
    border: 1px solid #676869;
    font-size: 16px;
    height: 34px;
-   width: 268px;
+   width: 100%;
    padding-left: 10px;
+
+}
+
+.mf-radio {
+  padding-right: 10px;
+  padding-left: 20px;
+  float: right;
+
+}
+
+.fixed-radio{
+  float: right;
+}
+
+.image button{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 158px;
 }
 
 
-
+/*/*/
 
 body{
   overflow: hidden;

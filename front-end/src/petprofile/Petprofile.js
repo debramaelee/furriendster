@@ -46,42 +46,46 @@ class Petprofile extends React.Component {
           <span className="label-text"></span>
           <input className="name" type="text" key = "text" name="name" value = {this.props.name} placeholder="Name" onChange={event=> this.props.name9(event.target.value)}/>
           </label>
-
+          <div className="mf-radio">
           <input className="radio" type="radio" name="gender" value="male" onChange={event=>this.props.gender9(event.target.value)}/>Male
 
-          <input className="radio" type="radio" name="gender" value="female" onChange={event=>this.props.gender9(event.target.value)}/>Female<br/>
-
-          <input className="radio" type="checkbox" name="fixed" value = {this.props.fixed}  onChange={event=>this.props.fixed9(event.target.value)}/>Fixed?<br/>
-          <div className="styled-select slate">
-          <label>Age</label><br/>
+          <input className="radio" type="radio" name="gender" value="female" onChange={event=>this.props.gender9(event.target.value)}/>Female
+          </div>
+          <div className="fixed-radio">
+          <input className="radio" type="checkbox" name="fixed" value = {this.props.fixed}  onChange={event=>this.props.fixed9(event.target.value)}/>Fixed?
+          </div>
+          <br/>
+          <div className="age-label">
+          <label>Age</label>
           <select name="age" value = {this.props.age}  onChange={event=>this.props.age9(event.target.value)}>
             <option value="puppy" >Puppy (0 - 12 months)</option>
             <option value="teen">Adolescent (1 - 2 years)</option>
             <option value="adult">Adult (2 - 8 years)</option>
             <option value="senior">Senior (8+ years)</option>
-          </select><br/>
-          </div>
+          </select>
 
 
-          <label>Size</label><br/>
+
+
+          <label>Size</label>
           <select name="size" value = {this.props.size}  onChange={event=>this.props.size9(event.target.value)}>
             <option value="small" >Small</option>
             <option value="medium">Medium</option>
             <option value="large">Large</option>
-          </select><br/>
+          </select>
 
 
-          <div className="styled-select slate">
-          <label>Personality</label><br/>
+
+          <label>Personality</label>
           <select name="personality" value = {this.props.personality}  onChange={event=>this.props.personality9(event.target.value)}>
             <option value="energetic" >Energetic/Social</option>
             <option value="laidback" >Laidback/Gentle</option>
             <option value="independent" >Independent/Stubborn</option>
           </select><br/>
-          </div>
 
-          <div className="styled-select slate">
-          <label>Favorite Activity</label><br/>
+
+
+          <label>Favorite Activity</label>
           <select name="activity" value = {this.props.activities}  onChange={event=>this.props.activity9(event.target.value)}>
             <option value="fetch" >Playing Fetch</option>
             <option value="hike" >Hiking</option>
@@ -89,20 +93,22 @@ class Petprofile extends React.Component {
             <option value="run" >Running and Chasing</option>
             <option value="tug" >Tug of War</option>
           </select><br/>
-          </div>
+
 
           <div className="Description">
           <label> Description</label>
 
-            <textarea cols="50" rows="5" value={this.props.description}  onChange={event=>this.props.description9(event.target.value)}/>
+            <textarea cols="77" rows="10" value={this.props.description}  onChange={event=>this.props.description9(event.target.value)}/>
           </div>
-
+          </div>
           <button className="submit" onSubmit={event=>this.submit(event)}>Submit!</button>
 
         </form>
-        <button className="image" onClick={event=>this.props.uploadImage(event.target.value)}>
+        <div className="image">
+        <button  onClick={event=>this.props.uploadImage(event.target.value)}>
         <h1> add image</h1>
         </button><br/>
+        </div>
       </div>
     </div>
     );
