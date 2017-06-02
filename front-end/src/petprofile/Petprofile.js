@@ -98,7 +98,7 @@ class Petprofile extends React.Component {
           <div className="Description">
           <label> Description</label>
 
-            <textarea cols="77" rows="10" value={this.props.description}  onChange={event=>this.props.description9(event.target.value)}/>
+            <textarea cols="75" rows="10" value={this.props.description}  onChange={event=>this.props.description9(event.target.value)}/>
           </div>
           </div>
           <button className="submit" onSubmit={event=>this.submit(event)}>Submit!</button>

@@ -85,7 +85,7 @@ class CommentList extends React.Component {
         });
         return (
           <div className="neighbors">
-          <h2>Chat with your Neighbors</h2>
+          <h1>Chat with your Neighbors</h1>
             <div className="commentList">
 
               <div className="commentNodes">

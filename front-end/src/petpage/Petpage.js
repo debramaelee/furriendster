@@ -64,8 +64,8 @@ console.log(petImage);
           <h3>Gender: {petGender} ({petFixed})</h3>
           <h3>Age: {petAge}</h3>
           <h3>Size: {petSize}</h3>
-          <p>I am {petPersonality} and I love to {petActivities}.</p>
-          <p>description {petDescription}</p>
+          <h4>I am {petPersonality} and I love to {petActivities}.</h4>
+          <p>{petDescription}</p>
         </div>
 
 
