@@ -26,6 +26,7 @@ class Ownerpage extends React.Component {
 
   render() {
 let ownerName;
+let ownerEmail;
 let petName;
 let petId;
 let petImage;
@@ -35,6 +36,7 @@ let petImage;
 // }
 if (this.props.owner_info){
   ownerName = this.props.owner_info.name;
+  ownerEmail = this.props.owner_info.email;
   petName = this.props.pet_info.name;
   petImage = this.props.pet_info.image_url;
 }
@@ -58,6 +60,7 @@ if (this.props.owner_info){
         </li>
 
       )}
+      <p>Contact {ownerName} at {ownerEmail}</p>
       </div>
     );
   }

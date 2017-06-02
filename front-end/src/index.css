@@ -343,6 +343,11 @@ margin-right: 20px;
   padding-left: 50px;
   padding-top: 40px;
 }
+.owner-bio p {
+	text-align: center;
+	color: black;
+	padding-bottom: 40px;
+}
 
 .pet-bio img {
   padding-left: 50px;
@@ -352,6 +357,7 @@ margin-right: 20px;
   padding-left: 50px;
   padding-top: 40px;
 }
+
 
 .petdesc {
   padding-left: 50px;
@@ -938,6 +944,7 @@ margin-right: 20px;
 
  textarea {
 	outline: none;
+	font-size: 20px;
 }
 
 
