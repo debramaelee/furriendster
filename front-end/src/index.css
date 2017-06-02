@@ -934,6 +934,9 @@ a:hover
 		left: 50%;
 		/*z-index: 1;*/
 	width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 .petprofileform .container:before{
 	background: url(/best-friends.jpg) center no-repeat;
@@ -1132,6 +1135,29 @@ a:hover
   margin: auto;
   display: block;
 }
+
+
+
+/*select option */
+
+
+.petprofileform select {
+
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 240px;
+}
+
+
+.petprofileform select {
+  appearance: none;
+   border: 1px solid #676869;
+   font-size: 16px;
+   height: 34px;
+   width: 268px;
+   padding-left: 10px;
+}
+
 
 
 

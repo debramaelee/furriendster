@@ -39,9 +39,9 @@ class Map extends React.Component {
       map: this.map,
       position: place.geometry.location,
       icon: {
-        url: 'https://cdn1.iconfinder.com/data/icons/cute-corgi-dog-emoticon/595/CUTE_CORGI_DOG_EMOTICON-08-512.png',
+        url: '/owner.png',
         anchor: new google.maps.Point(10, 10),
-        scaledSize: new google.maps.Size(50, 50)
+        scaledSize: new google.maps.Size(40, 40)
       }
     });
 
@@ -116,9 +116,9 @@ class Map extends React.Component {
             map: this.map,
             position: new google.maps.LatLng(latitude, longitude),
             icon: {
-              url: 'https://image.flaticon.com/icons/png/512/12/12638.png',
+              url: '/paw80.png',
               anchor: new google.maps.Point(10, 10),
-              scaledSize: new google.maps.Size(30, 30)
+              scaledSize: new google.maps.Size(40, 40)
             }
           });
 
